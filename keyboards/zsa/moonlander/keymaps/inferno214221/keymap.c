@@ -5,31 +5,51 @@
 #define ZSA_SAFE_RANGE SAFE_RANGE
 #endif
 
+#include "tetris.h"
+#include "audio.h"
+
+float song_tetris[][2] = SONG(TETRIS_SONG);
+
 enum custom_keycodes {
   RGB_SLD = ZSA_SAFE_RANGE,
+  TET_LEFT,
+  TET_RGHT,
+  TET_DOWN,
+  TET_ROT,
+  TET_RES,
+  TET_PAUS
 };
 
 
 
 #define L_DEF 0
 #define L_FUN 1
+#define L_TET 2
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_DEF] = LAYOUT_moonlander(
-    KC_ESC,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_CALC,                            KC_PSCR,    KC_6,       KC_7,       KC_8,         KC_9,       KC_0,       OSL(L_FUN),
-    KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_HOME,                            KC_END,     KC_Y,       KC_U,       KC_I,         KC_O,       KC_P,       _______,
-    KC_LGUI,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LALT,                            _______,    KC_H,       KC_J,       KC_K,         KC_L,       KC_SCLN,    KC_QUOT,
-    KC_GRV,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                                                       KC_N,       KC_M,       KC_COMM,      KC_DOT,     KC_SLSH,    KC_BSLS,
-    _______,    KC_MINS,    KC_EQL,     KC_UP,      KC_DOWN,                LCTL(KC_X),                         LCTL(KC_V),             KC_LEFT,    KC_RGHT,      KC_LBRC,    KC_RBRC,    KC_DEL,
+    KC_ESC,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_CALC,                            KC_PSCR,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       OSL(L_FUN),
+    KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_HOME,                            KC_END,     KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       _______,
+    KC_LGUI,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LALT,                            _______,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
+    KC_GRV,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                                                       KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_BSLS,
+    _______,    KC_MINS,    KC_EQL,     KC_UP,      KC_DOWN,                LCTL(KC_X),                         LCTL(KC_V),             KC_LEFT,    KC_RGHT,    KC_LBRC,    KC_RBRC,    KC_DEL,
                                                                 KC_LSFT,    KC_BSPC,    KC_LCTL,    LCTL(KC_C), KC_SPC,     KC_ENT
   ),
   [L_FUN] = LAYOUT_moonlander(
-    QK_BOOT,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,                              KC_F7,      KC_F8,      KC_F9,      KC_F10,       KC_F11,     KC_F12,     KC_NO,
-    MU_TOGG,    KC_VOLD,    KC_MPLY,    KC_VOLU,    KC_NO,      KC_NO,      KC_NO,                              KC_NO,      KC_NO,      KC_NO,      KC_NO,        KC_NO,      KC_NO,      KC_NO,
-    MU_NEXT,    KC_MPRV,    KC_MSTP,    KC_MNXT,    KC_NO,      KC_NO,      KC_NO,                              KC_NO,      KC_NO,      KC_NO,      KC_NO,        KC_NO,      KC_NO,      KC_NO,
-    KC_NO,      KC_SLEP,    KC_PWR,     KC_NO,      KC_NO,      KC_NO,                                                      KC_NO,      KC_NO,      KC_NO,        KC_NO,      KC_NO,      KC_NO,
-    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,                  KC_NO,                              KC_NO,                  KC_NO,      KC_NO,        KC_NO,      KC_NO,      KC_NO,
-                                                                RM_HUEU,    RM_HUED,    KC_NO,      KC_NO,      RM_SATU,    RM_SATD
+    QK_BOOT,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,                              KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,     KC_F12,     XXXXXXX,
+    MU_TOGG,    KC_VOLD,    KC_MPLY,    KC_VOLU,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    MU_NEXT,    KC_MPRV,    KC_MSTP,    KC_MNXT,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    KC_SLEP,    KC_PWR,     XXXXXXX,    XXXXXXX,    XXXXXXX,                                                    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,                            XXXXXXX,                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    TO(L_TET),
+                                                                RM_HUEU,    RM_HUED,    XXXXXXX,    XXXXXXX,    RM_SATU,    RM_SATD
+  ),
+  [L_TET] = LAYOUT_moonlander(
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    TO(L_DEF),
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                                                    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,                            TET_ROT,                TO(L_DEF),  XXXXXXX,    AU_TOGG,    TET_PAUS,   TET_RES,
+                                                                XXXXXXX,    XXXXXXX,    XXXXXXX,    TET_LEFT,   TET_DOWN,    TET_RGHT
   ),
   // Numpad doesn't make sense on a one shot layer.
   // [L_FUN] = LAYOUT_moonlander(
@@ -41,7 +61,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                                                               RM_HUEU,    RM_HUED,    TG(L_FUN),  TG(L_FUN),  RM_SATU,    RM_SATD
   // ),
 };
-
 
 
 
@@ -68,8 +87,6 @@ uint32_t on_keyboard_inactivity(uint32_t trigger_time, void *cb_arg) {
   return 0;
 }
 
-
-
 void keyboard_post_init_user(void) {
   rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_INVERSE_MULTISPLASH);
   rgb_matrix_sethsv_noeeprom(135, 255, 255);
@@ -78,6 +95,11 @@ void keyboard_post_init_user(void) {
 }
 
 
+
+void begin_tetris(void) {
+  init_tetris_state();
+  tetris_start();
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (inactivity_state) {
@@ -101,10 +123,51 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
   }
+
+  if (record->event.pressed) {
+    switch (keycode) {
+      case TET_RES:
+          begin_tetris();
+          return false;
+      case TET_LEFT:
+          tetris_register_move(MOVE_LEFT);
+          return false;
+      case TET_ROT:
+          tetris_register_move(MOVE_ROTATE);
+          return false;
+      case TET_RGHT:
+          tetris_register_move(MOVE_RIGHT);
+          return false;
+      case TET_PAUS:
+          tetris_pause();
+          return false;
+    }
+  }
   return true;
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
+  switch (get_highest_layer(state)) {
+    case L_FUN:
+      // TODO
+    case L_DEF:
+      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_INVERSE_MULTISPLASH);
+      audio_stop_all();
+      break;
+    case L_TET:
+      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_TETRIS);
+      PLAY_LOOP(song_tetris);
+      begin_tetris();
+
+      STATUS_LED_1(false);
+      STATUS_LED_2(false);
+      STATUS_LED_3(false);
+      STATUS_LED_4(true);
+      STATUS_LED_5(true);
+      STATUS_LED_6(true);
+      return state;
+  }
+
   STATUS_LED_1(is_caps_word_on());
   STATUS_LED_2(false);
   STATUS_LED_3(false);
