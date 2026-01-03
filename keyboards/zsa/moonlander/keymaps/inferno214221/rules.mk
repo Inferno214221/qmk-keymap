@@ -10,3 +10,4 @@ DEFERRED_EXEC_ENABLE = yes
 
 AUDIO_ENABLE = yes
 SRC += tetris.c
+SRC += music.c

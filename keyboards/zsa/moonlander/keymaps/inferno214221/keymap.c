@@ -6,12 +6,18 @@
 #endif
 
 #include "tetris.h"
-#include "audio.h"
+#include "music.h"
 
-float song_tetris[][2] = SONG(TETRIS_SONG);
+#include "audio.h"
 
 enum custom_keycodes {
   RGB_SLD = ZSA_SAFE_RANGE,
+  // Keyboard-level Music Controls
+  KM_PLAY,
+  KM_NEXT,
+  KM_PREV,
+
+  // Tetris Keycodes
   TET_LEFT,
   TET_RGHT,
   TET_DOWN,
@@ -20,16 +26,15 @@ enum custom_keycodes {
   TET_PAUS
 };
 
-
-
 #define L_DEF 0
 #define L_FUN 1
-#define L_TET 2
+#define L_GAM 2
+#define L_TET 3
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_DEF] = LAYOUT_moonlander(
     KC_ESC,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_CALC,                            KC_PSCR,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       OSL(L_FUN),
-    KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_HOME,                            KC_END,     KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       _______,
+    KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_HOME,                            KC_END,     KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       TG(L_GAM),
     KC_LGUI,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LALT,                            _______,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
     KC_GRV,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                                                       KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_BSLS,
     _______,    KC_MINS,    KC_EQL,     KC_UP,      KC_DOWN,                LCTL(KC_X),                         LCTL(KC_V),             KC_LEFT,    KC_RGHT,    KC_LBRC,    KC_RBRC,    KC_DEL,
@@ -37,11 +42,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [L_FUN] = LAYOUT_moonlander(
     QK_BOOT,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,                              KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,     KC_F12,     XXXXXXX,
-    MU_TOGG,    KC_VOLD,    KC_MPLY,    KC_VOLU,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    MU_NEXT,    KC_MPRV,    KC_MSTP,    KC_MNXT,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    MU_TOGG,    KC_VOLD,    KC_MPLY,    KC_VOLU,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KM_PLAY,    XXXXXXX,    XXXXXXX,
+    MU_NEXT,    KC_MPRV,    KC_MSTP,    KC_MNXT,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    KM_PREV,    XXXXXXX,    KM_NEXT,    XXXXXXX,
     XXXXXXX,    KC_SLEP,    KC_PWR,     XXXXXXX,    XXXXXXX,    XXXXXXX,                                                    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,                            XXXXXXX,                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    TO(L_TET),
-                                                                RM_HUEU,    RM_HUED,    XXXXXXX,    XXXXXXX,    RM_SATU,    RM_SATD
+                                                                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX
+  ),
+  [L_GAM] = LAYOUT_moonlander(
+    KC_ESC,     _______,    _______,    _______,    _______,    _______,    XXXXXXX,                            XXXXXXX,    _______,    _______,    _______,    _______,    _______,    _______,
+    KC_TAB,     _______,    _______,    _______,    _______,    _______,    XXXXXXX,                            XXXXXXX,    _______,    _______,    _______,    _______,    _______,    _______,
+    KC_GRV,     _______,    _______,    _______,    _______,    _______,    XXXXXXX,                            XXXXXXX,    _______,    _______,    _______,    _______,    _______,    _______,
+    KC_LSFT,    _______,    _______,    _______,    _______,    _______,                                                    _______,    _______,    _______,    _______,    KC_UP,      _______,
+    KC_LCTL,    KC_F1,      KC_F2,      KC_F3,      KC_F4,                  XXXXXXX,                            XXXXXXX,                KC_DEL,     KC_SLSH,    KC_LEFT,    KC_DOWN,    KC_RGHT,
+                                                                KC_SPC,     KC_SPC,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX
   ),
   [L_TET] = LAYOUT_moonlander(
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    TO(L_DEF),
@@ -87,6 +100,21 @@ uint32_t on_keyboard_inactivity(uint32_t trigger_time, void *cb_arg) {
   return 0;
 }
 
+void update_inactivity(void) {
+  switch (inactivity_state) {
+    case STATE_FADING_OUT:
+      cancel_deferred_exec(fade_out_timer);
+    case STATE_SLEEP:
+      inactivity_token = defer_exec(INACTIVITY_TIMEOUT, on_keyboard_inactivity, NULL);
+      // FIXME: assumes layer 0
+      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_INVERSE_MULTISPLASH);
+  }
+  inactivity_state = STATE_ACTIVE;
+  extend_deferred_exec(inactivity_token, INACTIVITY_TIMEOUT);
+}
+
+
+
 void keyboard_post_init_user(void) {
   rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_INVERSE_MULTISPLASH);
   rgb_matrix_sethsv_noeeprom(135, 255, 255);
@@ -101,46 +129,51 @@ void begin_tetris(void) {
   tetris_start();
 }
 
+
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (inactivity_state) {
-    case STATE_FADING_OUT:
-      cancel_deferred_exec(fade_out_timer);
-    case STATE_SLEEP:
-      inactivity_token = defer_exec(INACTIVITY_TIMEOUT, on_keyboard_inactivity, NULL);
-      // assumes layer 0
-      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_INVERSE_MULTISPLASH);
-  }
-  inactivity_state = STATE_ACTIVE;
-  extend_deferred_exec(inactivity_token, INACTIVITY_TIMEOUT);
+  update_inactivity();
 
   switch (keycode) {
     case RGB_SLD:
       if (rawhid_state.rgb_control) {
-          return false;
+        return false;
       }
       if (record->event.pressed) {
-          rgblight_mode(1);
+        rgblight_mode(1);
       }
       return false;
   }
 
   if (record->event.pressed) {
     switch (keycode) {
+      // Keyboard-level Music Controls
+      case KM_PLAY:
+        song_play();
+        return false;
+      case KM_NEXT:
+        song_next();
+        return false;
+      case KM_PREV:
+        song_prev();
+        return false;
+
+      // Tetris Keycodes
       case TET_RES:
-          begin_tetris();
-          return false;
+        begin_tetris();
+        return false;
       case TET_LEFT:
-          tetris_register_move(MOVE_LEFT);
-          return false;
+        tetris_register_move(MOVE_LEFT);
+        return false;
       case TET_ROT:
-          tetris_register_move(MOVE_ROTATE);
-          return false;
+        tetris_register_move(MOVE_ROTATE);
+        return false;
       case TET_RGHT:
-          tetris_register_move(MOVE_RIGHT);
-          return false;
+        tetris_register_move(MOVE_RIGHT);
+        return false;
       case TET_PAUS:
-          tetris_pause();
-          return false;
+        tetris_pause();
+        return false;
     }
   }
   return true;
@@ -152,11 +185,15 @@ layer_state_t layer_state_set_user(layer_state_t state) {
       // TODO
     case L_DEF:
       rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_INVERSE_MULTISPLASH);
-      audio_stop_all();
+      // audio_stop_all();
       break;
+    case L_GAM:
+      // rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_INVERSE_MULTISPLASH);
+      PLAY_SONG(sfx_mario_mushroom);
+      break;    
     case L_TET:
       rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_TETRIS);
-      PLAY_LOOP(song_tetris);
+      PLAY_LOOP(song_tetris_theme);
       begin_tetris();
 
       STATUS_LED_1(false);
@@ -172,7 +209,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   STATUS_LED_2(false);
   STATUS_LED_3(false);
   STATUS_LED_4(false);
-  STATUS_LED_5(false);
+  STATUS_LED_5(IS_LAYER_ON_STATE(state, L_GAM));
   STATUS_LED_6(IS_LAYER_ON_STATE(state, L_FUN));
 
   return state;
