@@ -2,6 +2,6 @@ QMK and all of my code here is licensed under GNU GPLv2.
 
 However, the tetris mode that I've added to my keymap was written by Filitov
 Mikhail (https://github.com/lll-phill-lll) and is licensed under MIT. Relevant
-files all begin with "tetris_" and are included in this directory.
+files all begin with "tetris" and are included in this directory.
 
 Very cool software by the way, thanks heaps!
