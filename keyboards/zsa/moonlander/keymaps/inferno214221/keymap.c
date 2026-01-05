@@ -7,6 +7,7 @@
 
 #include "tetris.h"
 #include "music.h"
+#include "layers.h"
 
 #include "audio.h"
 
@@ -25,11 +26,6 @@ enum custom_keycodes {
   TET_RES,
   TET_PAUS
 };
-
-#define L_DEF 0
-#define L_FUN 1
-#define L_GAM 2
-#define L_TET 3
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_DEF] = LAYOUT_moonlander(
@@ -181,17 +177,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
   switch (get_highest_layer(state)) {
-    case L_FUN:
-      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_STATIC_FUN_KEYS);
-      break;
-    case L_DEF:
-      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_INVERSE_MULTISPLASH);
-      // audio_stop_all();
-      break;
     case L_GAM:
-      // rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_INVERSE_MULTISPLASH);
       PLAY_SONG(sfx_mario_mushroom);
-      break;    
+    case L_DEF:
+    case L_FUN:
+      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_INVERSE_MULTISPLASH);
+      break;
     case L_TET:
       rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_TETRIS);
       PLAY_LOOP(song_tetris_theme);
