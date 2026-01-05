@@ -83,6 +83,8 @@ static deferred_token fade_out_timer;
 
 static uint8_t inactivity_state = STATE_ACTIVE;
 
+static bool one_handed = false;
+
 uint32_t on_fade_out_finished(uint32_t trigger_time, void *cb_arg) {
   inactivity_state = STATE_SLEEP;
   rgb_matrix_mode_noeeprom(RGB_MATRIX_DIGITAL_RAIN);
@@ -197,16 +199,50 @@ layer_state_t layer_state_set_user(layer_state_t state) {
       return state;
   }
 
-  STATUS_LED_1(is_caps_word_on());
-  STATUS_LED_2(false);
-  STATUS_LED_3(false);
-  STATUS_LED_4(false);
-  STATUS_LED_5(IS_LAYER_ON_STATE(state, L_GAM));
-  STATUS_LED_6(IS_LAYER_ON_STATE(state, L_FUN));
+  if (one_handed) {
+    // Lose half of the LEDs, make them act differently
+    STATUS_LED_1(false);
+    STATUS_LED_2(IS_LAYER_ON_STATE(state, L_GAM));
+    STATUS_LED_3(false);
+  } else {
+    STATUS_LED_1(is_caps_word_on());
+    STATUS_LED_2(false);
+    STATUS_LED_3(false);
+    STATUS_LED_4(false);
+    STATUS_LED_5(IS_LAYER_ON_STATE(state, L_GAM));
+    STATUS_LED_6(IS_LAYER_ON_STATE(state, L_FUN));
+  }
 
   return state;
 }
 
+
+
 void caps_word_set_user(bool active) {
   STATUS_LED_1(active);
+}
+
+
+
+
+void enable_one_handed(void) {
+  layer_clear();
+  layer_on(L_DEF);
+  layer_on(L_GAM);
+}
+
+void disable_one_handed(void) {
+  layer_clear();
+  layer_on(L_DEF);
+}
+
+void housekeeping_task_user(void) {
+  if (one_handed == is_transport_connected()) {
+    one_handed = !is_transport_connected();
+    if (one_handed) {
+      enable_one_handed();
+    } else {
+      disable_one_handed();
+    }
+  }
 }
