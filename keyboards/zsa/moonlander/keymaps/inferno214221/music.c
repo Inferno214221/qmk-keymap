@@ -68,4 +68,5 @@ void song_prev(void) {
   } else {
     song_index--;
   }
+  song_play();
 }

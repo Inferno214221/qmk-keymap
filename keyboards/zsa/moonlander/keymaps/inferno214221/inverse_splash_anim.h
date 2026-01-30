@@ -35,7 +35,7 @@ RGB_MATRIX_EFFECT(INVERSE_MULTISPLASH)
 
 //                h   s   v   dh  ds  dv
 #define C_BLUE  {135,255,255,  8,  0,-40}
-#define C_BLACK {  0,  0,  0,  0,  0,  0}
+#define C_BLACK {  0,255,  0,  0,  0, 40}
 #define C_RED   {  0,255,255,  0,  0,-60}
 
 #define DEFAULT_RGB LED_LAYOUT_moonlander( \
@@ -44,7 +44,7 @@ RGB_MATRIX_EFFECT(INVERSE_MULTISPLASH)
     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,                             C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE, \
     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,                                                     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE, \
     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,                 C_BLUE,                             C_BLUE,                 C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE, \
-                                                                C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLACK \
+                                                                C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE \
 )
 
 int16_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][6] = {
