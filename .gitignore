@@ -136,3 +136,7 @@ via*.json
 
 # Direnv
 .direnv/
+
+# Include My Layout Documentation
+!/*.png
+!/*.pdf

@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_DEF] = LAYOUT_moonlander(
     KC_ESC,     KC_LCBR,    KC_RCBR,    KC_LABK,    KC_RABK,    KC_HASH,    KC_CALC,                            KC_PSCR,    KC_DLR,     KC_LBRC,    KC_RBRC,    KC_LPRN,    KC_RPRN,    OSL(L_FUN),
     KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_HOME,                            KC_END,     KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       TG(L_GAM),
-    KC_LGUI,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LALT,                            _______,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_DQUO,
+    KC_LGUI,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LALT,                            _______,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
     KC_GRV,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                                                       KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_QUES,
     _______,    KC_MINS,    KC_EQL,     KC_UP,      KC_DOWN,                LCTL(KC_X),                         LCTL(KC_V),             KC_LEFT,    KC_RGHT,    KC_AMPR,    KC_ASTR,    KC_DEL,
                                                                 KC_LSFT,    KC_BSPC,    KC_LCTL,    LCTL(KC_C), KC_SPC,     KC_ENT
@@ -84,7 +84,6 @@ KEY_OVERRIDE_SHIFT(rbrc_8_override, KC_RBRC, KC_8);
 KEY_OVERRIDE_SHIFT(lprn_9_override, KC_LPRN, KC_9);
 KEY_OVERRIDE_SHIFT(rprn_0_override, KC_RPRN, KC_0);
 
-KEY_OVERRIDE_SHIFT(dquo_quot_override, KC_DQUO, KC_QUOT);
 KEY_OVERRIDE_SHIFT(comm_at_override,   KC_COMM, KC_AT);
 KEY_OVERRIDE_SHIFT(dot_circ_override,  KC_DOT,  KC_CIRC);
 KEY_OVERRIDE_SHIFT(slsh_bsls_override, KC_SLSH, KC_BSLS);
@@ -104,7 +103,6 @@ const key_override_t *key_overrides[] = {
   &lprn_9_override,
   &rprn_0_override,
 
-  &dquo_quot_override,
   &comm_at_override,
   &dot_circ_override,
   &slsh_bsls_override,
