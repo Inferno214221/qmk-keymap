@@ -29,11 +29,11 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_DEF] = LAYOUT_moonlander(
-    KC_ESC,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_CALC,                            KC_PSCR,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       OSL(L_FUN),
+    KC_ESC,     KC_LCBR,    KC_RCBR,    KC_LABK,    KC_RABK,    KC_HASH,    KC_CALC,                            KC_PSCR,    KC_DLR,     KC_LBRC,    KC_RBRC,    KC_LPRN,    KC_RPRN,    OSL(L_FUN),
     KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_HOME,                            KC_END,     KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       TG(L_GAM),
-    KC_LGUI,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LALT,                            _______,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
-    KC_GRV,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                                                       KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_BSLS,
-    _______,    KC_MINS,    KC_EQL,     KC_UP,      KC_DOWN,                LCTL(KC_X),                         LCTL(KC_V),             KC_LEFT,    KC_RGHT,    KC_LBRC,    KC_RBRC,    KC_DEL,
+    KC_LGUI,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LALT,                            _______,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_DQUO,
+    KC_GRV,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                                                       KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_QUES,
+    _______,    KC_MINS,    KC_EQL,     KC_UP,      KC_DOWN,                LCTL(KC_X),                         LCTL(KC_V),             KC_LEFT,    KC_RGHT,    KC_AMPR,    KC_ASTR,    KC_DEL,
                                                                 KC_LSFT,    KC_BSPC,    KC_LCTL,    LCTL(KC_C), KC_SPC,     KC_ENT
   ),
   [L_FUN] = LAYOUT_moonlander(
@@ -45,10 +45,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                 XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX
   ),
   [L_GAM] = LAYOUT_moonlander(
-    KC_ESC,     _______,    _______,    _______,    _______,    _______,    XXXXXXX,                            XXXXXXX,    _______,    _______,    _______,    _______,    _______,    _______,
+    KC_ESC,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       XXXXXXX,                            XXXXXXX,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
     KC_TAB,     _______,    _______,    _______,    _______,    _______,    XXXXXXX,                            XXXXXXX,    _______,    _______,    _______,    _______,    _______,    _______,
-    KC_GRV,     _______,    _______,    _______,    _______,    _______,    XXXXXXX,                            XXXXXXX,    _______,    _______,    _______,    _______,    _______,    _______,
-    KC_LSFT,    _______,    _______,    _______,    _______,    _______,                                                    _______,    _______,    _______,    _______,    KC_UP,      _______,
+    KC_GRV,     _______,    _______,    _______,    _______,    _______,    XXXXXXX,                            XXXXXXX,    _______,    _______,    _______,    _______,    KC_SCLN,    KC_QUOT,
+    KC_LSFT,    _______,    _______,    _______,    _______,    _______,                                                    _______,    _______,    KC_COMM,    KC_DOT,     KC_UP,      KC_BSLS,
     KC_LCTL,    KC_F1,      KC_F2,      KC_F3,      KC_F4,                  XXXXXXX,                            XXXXXXX,                KC_DEL,     KC_SLSH,    KC_LEFT,    KC_DOWN,    KC_RGHT,
                                                                 KC_SPC,     KC_SPC,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX
   ),
@@ -71,6 +71,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ),
 };
 
+#define KEY_OVERRIDE_SHIFT(NAME, FROM, TO) const key_override_t NAME = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, FROM, TO, 1 << L_DEF, ~MOD_MASK_SHIFT);
+
+KEY_OVERRIDE_SHIFT(lcbr_1_override, KC_LCBR, KC_1);
+KEY_OVERRIDE_SHIFT(rcbr_2_override, KC_RCBR, KC_2);
+KEY_OVERRIDE_SHIFT(labk_3_override, KC_LABK, KC_3);
+KEY_OVERRIDE_SHIFT(rabk_4_override, KC_RABK, KC_4);
+KEY_OVERRIDE_SHIFT(hash_5_override, KC_HASH, KC_5);
+KEY_OVERRIDE_SHIFT(dlr_6_override,  KC_DLR,  KC_6);
+KEY_OVERRIDE_SHIFT(lbrc_7_override, KC_LBRC, KC_7);
+KEY_OVERRIDE_SHIFT(rbrc_8_override, KC_RBRC, KC_8);
+KEY_OVERRIDE_SHIFT(lprn_9_override, KC_LPRN, KC_9);
+KEY_OVERRIDE_SHIFT(rprn_0_override, KC_RPRN, KC_0);
+
+KEY_OVERRIDE_SHIFT(dquo_quot_override, KC_DQUO, KC_QUOT);
+KEY_OVERRIDE_SHIFT(comm_at_override,   KC_COMM, KC_AT);
+KEY_OVERRIDE_SHIFT(dot_circ_override,  KC_DOT,  KC_CIRC);
+KEY_OVERRIDE_SHIFT(slsh_bsls_override, KC_SLSH, KC_BSLS);
+KEY_OVERRIDE_SHIFT(ques_exlm_override, KC_QUES, KC_EXLM);
+KEY_OVERRIDE_SHIFT(ampr_pipe_override, KC_AMPR, KC_PIPE);
+KEY_OVERRIDE_SHIFT(astr_perc_override, KC_ASTR, KC_PERC);
+
+const key_override_t *key_overrides[] = {
+  &lcbr_1_override,
+  &rcbr_2_override,
+  &labk_3_override,
+  &rabk_4_override,
+  &hash_5_override,
+  &dlr_6_override,
+  &lbrc_7_override,
+  &rbrc_8_override,
+  &lprn_9_override,
+  &rprn_0_override,
+
+  &dquo_quot_override,
+  &comm_at_override,
+  &dot_circ_override,
+  &slsh_bsls_override,
+  &ques_exlm_override,
+  &ampr_pipe_override,
+  &astr_perc_override,
+};
 
 
 static deferred_token inactivity_token;
