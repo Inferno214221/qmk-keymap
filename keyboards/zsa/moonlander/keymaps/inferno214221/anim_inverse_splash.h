@@ -37,7 +37,7 @@ RGB_MATRIX_EFFECT(INVERSE_MULTISPLASH)
 #define C_BLUE  {135,255,255,  8,  0,-40}
 #define C_RED   {  0,255,255,  0,  0,-60}
 #define C_OFF_R {  0,255,  0,  0,  0, 40}
-#define C_GREEN { 85,255,255,  0,  0, 40}
+#define C_GREEN { 85,255,255,  0,  0,-40}
 #define C_OFF_G { 85,255,  0,  0,  0, 40}
 
 #define DEFAULT_RGB LED_LAYOUT_moonlander( \
@@ -56,7 +56,7 @@ int16_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][6] = {
         C_OFF_R,    C_RED,      C_RED,      C_RED,      C_OFF_R,    C_OFF_R,    C_OFF_R,                            C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_RED,      C_OFF_R,    C_OFF_R,
         C_OFF_R,    C_RED,      C_RED,      C_RED,      C_OFF_R,    C_OFF_R,    C_OFF_R,                            C_OFF_R,    C_OFF_R,    C_OFF_R,    C_RED,      C_RED,      C_RED,      C_OFF_R,
         C_OFF_R,    C_RED,      C_RED,      C_OFF_R,    C_OFF_R,    C_OFF_R,                                                    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,
-        C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,                C_OFF_R,                            C_OFF_R,                C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,
+        C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,                C_OFF_R,                            C_OFF_R,                C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_RED,
                                                                     C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R
     ),
     [L_NUM] = LED_LAYOUT_moonlander(

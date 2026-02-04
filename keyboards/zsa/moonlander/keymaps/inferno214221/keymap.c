@@ -159,8 +159,7 @@ void update_inactivity(void) {
       cancel_deferred_exec(fade_out_timer);
     case STATE_SLEEP:
       inactivity_token = defer_exec(INACTIVITY_TIMEOUT, on_keyboard_inactivity, NULL);
-      // FIXME: assumes layer 0
-      rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_INVERSE_MULTISPLASH);
+      layer_move(L_DEF);
   }
   inactivity_state = STATE_ACTIVE;
   extend_deferred_exec(inactivity_token, INACTIVITY_TIMEOUT);
@@ -169,20 +168,13 @@ void update_inactivity(void) {
 
 
 void keyboard_post_init_user(void) {
-  rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_INVERSE_MULTISPLASH);
-  rgb_matrix_sethsv_noeeprom(135, 255, 255);
-  rgb_matrix_set_speed_noeeprom(63);
   inactivity_token = defer_exec(INACTIVITY_TIMEOUT, on_keyboard_inactivity, NULL);
 }
-
-
 
 void begin_tetris(void) {
   init_tetris_state();
   tetris_start();
 }
-
-
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   update_inactivity();
@@ -261,15 +253,15 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   if (one_handed) {
     // Lose half of the LEDs, make them act differently
     STATUS_LED_1(IS_LAYER_ON_STATE(state, L_GAM));
-    STATUS_LED_2(false);
-    STATUS_LED_3(false);
+    STATUS_LED_2(IS_LAYER_ON_STATE(state, L_GAM));
+    STATUS_LED_3(IS_LAYER_ON_STATE(state, L_GAM));
   } else {
     STATUS_LED_1(is_caps_word_on());
     STATUS_LED_2(leader_sequence_active());
     STATUS_LED_3(false);
     STATUS_LED_4(IS_LAYER_ON_STATE(state, L_GAM));
-    STATUS_LED_5(IS_LAYER_ON_STATE(state, L_NUM));
-    STATUS_LED_6(IS_LAYER_ON_STATE(state, L_FUN));
+    STATUS_LED_5(IS_LAYER_ON_STATE(state, L_NUM) || IS_LAYER_ON_STATE(state, L_GAM));
+    STATUS_LED_6(IS_LAYER_ON_STATE(state, L_FUN) || IS_LAYER_ON_STATE(state, L_GAM));
   }
 
   return state;
@@ -307,18 +299,13 @@ void caps_word_set_user(bool active) {
   STATUS_LED_1(active);
 }
 
-
-
-
 void enable_one_handed(void) {
-  layer_clear();
-  layer_on(L_DEF);
+  layer_move(L_DEF);
   layer_on(L_GAM);
 }
 
 void disable_one_handed(void) {
-  layer_clear();
-  layer_on(L_DEF);
+  layer_move(L_DEF);
 }
 
 void housekeeping_task_user(void) {
