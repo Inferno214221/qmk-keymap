@@ -34,20 +34,19 @@ RGB_MATRIX_EFFECT(INVERSE_MULTISPLASH)
     kBG, kBF, kBE, kBD, \
 }
 
-//                h   s   v   dh  ds  dv
-#define C_BLUE  {135,255,255,  8,  0,-40}
-#define C_RED   {  0,255,255,  0,  0,-60}
-#define C_OFF_R {  0,255,  0,  0,  0, 40}
-#define C_GREEN { 85,255,255,  0,  0,-40}
-#define C_OFF_G { 85,255,  0,  0,  0, 40}
+//                h   v   dh dv
+#define C_BLUE  {135,255,  8,-40}
+#define C_RED   {  0,255,  0,-60}
+#define C_OFF_R {  0,  0,  0, 40}
+#define C_GREEN { 85,255,  0,-40}
+#define C_OFF_G { 85,  0,  0, 40}
 
 typedef struct PACKED hsv_delta_t {
     int8_t h;
-    int8_t s;
     int8_t v;
 } hsv_delta_t;
 
-int16_t PROGMEM led_layers[][2][6] = {
+int16_t PROGMEM led_layers[][2][4] = {
     //         primary  secondary
     [L_DEF] = {C_BLUE,  C_BLUE},
     [L_FUN] = {C_RED,   C_OFF_R},
@@ -68,7 +67,6 @@ hsv_t inverse_splash_math(hsv_t hsv, hsv_delta_t delta, int16_t dx, int16_t dy, 
     uint16_t effect = tick - dist;
     if (effect > 255) effect = 255;
     hsv.h = apply_hsv_delta(hsv.h, effect, delta.h);
-    hsv.s = apply_hsv_delta(hsv.s, effect, delta.s);
     hsv.v = apply_hsv_delta(hsv.v, effect, delta.v);
     return hsv;
 }
@@ -87,13 +85,12 @@ bool INVERSE_MULTISPLASH(effect_params_t* params) {
 
             hsv_t hsv = {
                 .h = pgm_read_byte(&led_layers[highest][use_secondary][0]),
-                .s = pgm_read_byte(&led_layers[highest][use_secondary][1]),
-                .v = pgm_read_byte(&led_layers[highest][use_secondary][2]),
+                .s = 255,
+                .v = pgm_read_byte(&led_layers[highest][use_secondary][1]),
             };
             hsv_delta_t delta = {
-                .h = pgm_read_byte(&led_layers[highest][use_secondary][3]),
-                .s = pgm_read_byte(&led_layers[highest][use_secondary][4]),
-                .v = pgm_read_byte(&led_layers[highest][use_secondary][5]),
+                .h = pgm_read_byte(&led_layers[highest][use_secondary][2]),
+                .v = pgm_read_byte(&led_layers[highest][use_secondary][3]),
             };
 
             for (uint8_t j = 0; j < count; j++) {
