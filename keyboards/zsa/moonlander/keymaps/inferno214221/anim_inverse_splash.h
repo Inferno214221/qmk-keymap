@@ -5,6 +5,7 @@ RGB_MATRIX_EFFECT(INVERSE_MULTISPLASH)
 #    ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
 #include "layers.h"
+#include "keymap_common.h"
 
 #define LED_LAYOUT_moonlander( \
     k0A, k0B, k0C, k0D, k0E, k0F, k0G,            k6A, k6B, k6C, k6D, k6E, k6F, k6G, \
@@ -40,42 +41,20 @@ RGB_MATRIX_EFFECT(INVERSE_MULTISPLASH)
 #define C_GREEN { 85,255,255,  0,  0,-40}
 #define C_OFF_G { 85,255,  0,  0,  0, 40}
 
-#define DEFAULT_RGB LED_LAYOUT_moonlander( \
-    C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,                             C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE, \
-    C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,                             C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE, \
-    C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,                             C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE, \
-    C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,                                                     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE, \
-    C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,                 C_BLUE,                             C_BLUE,                 C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE, \
-                                                                C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE \
-)
-
-int16_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][6] = {
-    [L_DEF] = DEFAULT_RGB,
-    [L_FUN] = LED_LAYOUT_moonlander(
-        C_RED,      C_RED,      C_RED,      C_RED,      C_RED,      C_RED,      C_RED,                              C_RED,      C_RED,      C_RED,      C_RED,      C_RED,      C_RED,      C_RED,
-        C_OFF_R,    C_RED,      C_RED,      C_RED,      C_OFF_R,    C_OFF_R,    C_OFF_R,                            C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_RED,      C_OFF_R,    C_OFF_R,
-        C_OFF_R,    C_RED,      C_RED,      C_RED,      C_OFF_R,    C_OFF_R,    C_OFF_R,                            C_OFF_R,    C_OFF_R,    C_OFF_R,    C_RED,      C_RED,      C_RED,      C_OFF_R,
-        C_OFF_R,    C_RED,      C_RED,      C_OFF_R,    C_OFF_R,    C_OFF_R,                                                    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,
-        C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,                C_OFF_R,                            C_OFF_R,                C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_RED,
-                                                                    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R
-    ),
-    [L_NUM] = LED_LAYOUT_moonlander(
-        C_GREEN,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_GREEN,                            C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_GREEN,    C_GREEN,    C_GREEN,
-        C_GREEN,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_GREEN,                            C_GREEN,    C_OFF_G,    C_OFF_G,    C_GREEN,    C_GREEN,    C_GREEN,    C_GREEN,
-        C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,                            C_GREEN,    C_OFF_G,    C_OFF_G,    C_GREEN,    C_GREEN,    C_GREEN,    C_GREEN,
-        C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,                                                    C_OFF_G,    C_OFF_G,    C_GREEN,    C_GREEN,    C_GREEN,    C_GREEN,
-        C_OFF_G,    C_OFF_G,    C_OFF_G,    C_GREEN,    C_GREEN,                C_OFF_G,                            C_OFF_G,                C_GREEN,    C_GREEN,    C_GREEN,    C_GREEN,    C_GREEN,
-                                                                    C_OFF_G,    C_GREEN,    C_OFF_G,    C_OFF_G,    C_GREEN,    C_GREEN
-    ),
-    [L_GAM] = DEFAULT_RGB,
-    [L_TET] = DEFAULT_RGB
-};
-
 typedef struct PACKED hsv_delta_t {
     int8_t h;
     int8_t s;
     int8_t v;
 } hsv_delta_t;
+
+int16_t PROGMEM led_layers[][2][6] = {
+    //         primary  secondary
+    [L_DEF] = {C_BLUE,  C_BLUE},
+    [L_FUN] = {C_RED,   C_OFF_R},
+    [L_NUM] = {C_GREEN, C_OFF_G},
+    [L_GAM] = {C_BLUE,  C_BLUE},
+    [L_TET] = {C_BLUE,  C_BLUE},
+};
 
 uint8_t apply_hsv_delta(uint8_t value, uint8_t effect, int8_t delta) {
     if (delta < 0) {
@@ -97,33 +76,37 @@ hsv_t inverse_splash_math(hsv_t hsv, hsv_delta_t delta, int16_t dx, int16_t dy, 
 bool INVERSE_MULTISPLASH(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
 
+    uint8_t highest = get_highest_layer(layer_state);
+
     uint8_t count = g_last_hit_tracker.count;
-    for (uint8_t i = led_min; i < led_max; i++) {
-        RGB_MATRIX_TEST_LED_FLAGS();
+    for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
+        for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
+            uint8_t i = g_led_config.matrix_co[row][col];
 
-        uint8_t highest = get_highest_layer(layer_state);
+            bool use_secondary = keymap_key_to_keycode(highest, (keypos_t){col,row}) == KC_NO;
 
-        hsv_t hsv = {
-            .h = pgm_read_byte(&ledmap[highest][i][0]),
-            .s = pgm_read_byte(&ledmap[highest][i][1]),
-            .v = pgm_read_byte(&ledmap[highest][i][2]),
-        };
-        hsv_delta_t delta = {
-            .h = pgm_read_byte(&ledmap[highest][i][3]),
-            .s = pgm_read_byte(&ledmap[highest][i][4]),
-            .v = pgm_read_byte(&ledmap[highest][i][5]),
-        };
+            hsv_t hsv = {
+                .h = pgm_read_byte(&led_layers[highest][use_secondary][0]),
+                .s = pgm_read_byte(&led_layers[highest][use_secondary][1]),
+                .v = pgm_read_byte(&led_layers[highest][use_secondary][2]),
+            };
+            hsv_delta_t delta = {
+                .h = pgm_read_byte(&led_layers[highest][use_secondary][3]),
+                .s = pgm_read_byte(&led_layers[highest][use_secondary][4]),
+                .v = pgm_read_byte(&led_layers[highest][use_secondary][5]),
+            };
 
-        for (uint8_t j = 0; j < count; j++) {
-            int16_t  dx   = g_led_config.point[i].x - g_last_hit_tracker.x[j];
-            int16_t  dy   = g_led_config.point[i].y - g_last_hit_tracker.y[j];
-            uint8_t  dist = sqrt16(dx * dx + dy * dy);
-            uint16_t tick = scale16by8(g_last_hit_tracker.tick[j], qadd8(rgb_matrix_config.speed, 1));
-            hsv           = inverse_splash_math(hsv, delta, dx, dy, dist, tick);
+            for (uint8_t j = 0; j < count; j++) {
+                int16_t  dx   = g_led_config.point[i].x - g_last_hit_tracker.x[j];
+                int16_t  dy   = g_led_config.point[i].y - g_last_hit_tracker.y[j];
+                uint8_t  dist = sqrt16(dx * dx + dy * dy);
+                uint16_t tick = scale16by8(g_last_hit_tracker.tick[j], qadd8(rgb_matrix_config.speed, 1));
+                hsv           = inverse_splash_math(hsv, delta, dx, dy, dist, tick);
+            }
+            hsv.v     = scale8(hsv.v, rgb_matrix_config.hsv.v);
+            rgb_t rgb = rgb_matrix_hsv_to_rgb(hsv);
+            rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
         }
-        hsv.v     = scale8(hsv.v, rgb_matrix_config.hsv.v);
-        rgb_t rgb = rgb_matrix_hsv_to_rgb(hsv);
-        rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
     }
     return rgb_matrix_check_finished_leds(led_max);
 }
