@@ -132,11 +132,13 @@ static deferred_token inactivity_token;
 
 static deferred_token fade_out_timer;
 
-#define STATE_ACTIVE 0
-#define STATE_FADING_OUT 1
-#define STATE_SLEEP 2
+typedef enum {
+  STATE_ACTIVE,
+  STATE_FADING_OUT,
+  STATE_SLEEP
+} inactivity_state_t;
 
-static uint8_t inactivity_state = STATE_ACTIVE;
+static inactivity_state_t inactivity_state = STATE_ACTIVE;
 
 static bool one_handed = false;
 
@@ -160,6 +162,8 @@ void update_inactivity(void) {
     case STATE_SLEEP:
       inactivity_token = defer_exec(INACTIVITY_TIMEOUT, on_keyboard_inactivity, NULL);
       layer_move(L_DEF);
+    default:
+      break;
   }
   inactivity_state = STATE_ACTIVE;
   extend_deferred_exec(inactivity_token, INACTIVITY_TIMEOUT);
