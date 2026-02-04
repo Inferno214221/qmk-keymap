@@ -54,6 +54,10 @@ void song_play(void) {
   }
 }
 
+void song_stop(void) {
+  audio_stop_all();
+}
+
 void song_next(void) {
   song_index++;
   if (song_index >= SONG_COUNT) {

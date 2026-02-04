@@ -1,5 +1,7 @@
 void song_play(void);
 
+void song_stop(void);
+
 void song_next(void);
 
 void song_prev(void);

@@ -15,6 +15,7 @@ enum custom_keycodes {
   RGB_SLD = ZSA_SAFE_RANGE,
   // Keyboard-level Music Controls
   KM_PLAY,
+  KM_STOP,
   KM_NEXT,
   KM_PREV,
 
@@ -38,8 +39,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [L_FUN] = LAYOUT_moonlander(
     EE_CLR,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,                              KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,     KC_F12,     XXXXXXX,
-    MU_TOGG,    KC_VOLD,    KC_MPLY,    KC_VOLU,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KM_PLAY,    XXXXXXX,    XXXXXXX,
-    MU_NEXT,    KC_MPRV,    KC_MSTP,    KC_MNXT,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    KM_PREV,    XXXXXXX,    KM_NEXT,    XXXXXXX,
+    XXXXXXX,    KC_VOLD,    KC_MPLY,    KC_VOLU,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KM_PLAY,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    KC_MPRV,    KC_MSTP,    KC_MNXT,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    KM_PREV,    KM_STOP,    KM_NEXT,    XXXXXXX,
     XXXXXXX,    KC_SLEP,    KC_PWR,     XXXXXXX,    XXXXXXX,    XXXXXXX,                                                    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,                            XXXXXXX,                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    TO(L_TET),
                                                                 XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX
@@ -203,6 +204,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // Keyboard-level Music Controls
       case KM_PLAY:
         song_play();
+        return false;
+      case KM_STOP:
+        song_stop();
         return false;
       case KM_NEXT:
         song_next();
