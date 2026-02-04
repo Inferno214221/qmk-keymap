@@ -52,7 +52,7 @@ int16_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][6] = {
     [L_FUN] = LED_LAYOUT_moonlander(
         C_RED,      C_RED,      C_RED,      C_RED,      C_RED,      C_RED,      C_RED,                              C_RED,      C_RED,      C_RED,      C_RED,      C_RED,      C_RED,      C_RED,
         C_BLACK,    C_RED,      C_RED,      C_RED,      C_BLACK,    C_BLACK,    C_BLACK,                            C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_RED,      C_BLACK,    C_BLACK,
-        C_BLACK,    C_RED,      C_RED,      C_RED,      C_BLACK,    C_BLACK,    C_BLACK,                            C_BLACK,    C_BLACK,    C_BLACK,    C_RED,      C_BLACK,    C_RED,      C_BLACK,
+        C_BLACK,    C_RED,      C_RED,      C_RED,      C_BLACK,    C_BLACK,    C_BLACK,                            C_BLACK,    C_BLACK,    C_BLACK,    C_RED,      C_RED,      C_RED,      C_BLACK,
         C_BLACK,    C_RED,      C_RED,      C_BLACK,    C_BLACK,    C_BLACK,                                                    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,
         C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,                C_BLACK,                            C_BLACK,                C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,
                                                                     C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK
