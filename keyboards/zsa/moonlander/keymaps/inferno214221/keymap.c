@@ -32,9 +32,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_DEF] = LAYOUT_moonlander(
     KC_ESC,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_CALC,                            KC_PSCR,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       OSL(L_FUN),
     KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_HOME,                            KC_END,     KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       TG(L_GAM),
-    KC_LGUI,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LALT,                            _______,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
-    KC_GRV,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                                                       KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_QUES,
-    _______,    KC_MINS,    KC_EQL,     KC_UP,      KC_DOWN,                LCTL(KC_X),                         LCTL(KC_V),             KC_LEFT,    KC_RGHT,    KC_AMPR,    KC_ASTR,    KC_DEL,
+    KC_LGUI,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LALT,                            TG(L_NUM),  KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
+    KC_GRV,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                                                       KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_AMPR,
+    _______,    KC_MINS,    KC_EQL,     KC_UP,      KC_DOWN,                LCTL(KC_X),                         LCTL(KC_V),             KC_LEFT,    KC_RGHT,    KC_QUES,    KC_ASTR,    KC_DEL,
                                                                 KC_LSFT,    KC_BSPC,    KC_LCTL,    LCTL(KC_C), KC_SPC,     KC_ENT
   ),
   [L_FUN] = LAYOUT_moonlander(
@@ -45,8 +45,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,                            XXXXXXX,                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    TO(L_TET),
                                                                 XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX
   ),
+  [L_NUM] = LAYOUT_moonlander(
+    _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KC_LPRN,    KC_RPRN,    KC_CIRC,
+    _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,                            _______,    XXXXXXX,    XXXXXXX,    KC_P7,      KC_P8,      KC_P9,      KC_PSLS,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            _______,    XXXXXXX,    XXXXXXX,    KC_P4,      KC_P5,      KC_P6,      KC_PAST,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                                                    XXXXXXX,    XXXXXXX,    KC_P1,      KC_P2,      KC_P3,      KC_PMNS,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,    _______,                XXXXXXX,                            XXXXXXX,                _______,    _______,    KC_P0,      KC_PDOT,    KC_PPLS,
+                                                                XXXXXXX,    _______,    XXXXXXX,    XXXXXXX,    _______,    _______
+  ),
   [L_GAM] = LAYOUT_moonlander(
-    KC_ESC,     _______,    _______,    _______,    _______,    _______,    XXXXXXX,                            XXXXXXX,    _______,    _______,    _______,    _______,    _______,    _______,
+    KC_ESC,     _______,    _______,    _______,    _______,    _______,    XXXXXXX,                            XXXXXXX,    _______,    _______,    _______,    _______,    _______,    TG(L_GAM),
     KC_TAB,     _______,    _______,    _______,    _______,    _______,    XXXXXXX,                            XXXXXXX,    _______,    _______,    _______,    _______,    _______,    _______,
     KC_GRV,     _______,    _______,    _______,    _______,    _______,    XXXXXXX,                            XXXXXXX,    _______,    _______,    _______,    _______,    KC_SCLN,    KC_QUOT,
     KC_LSFT,    _______,    _______,    _______,    _______,    _______,                                                    _______,    _______,    KC_COMM,    KC_DOT,     KC_UP,      KC_BSLS,
@@ -61,15 +69,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,                            TET_ROT,                TO(L_DEF),  XXXXXXX,    AU_TOGG,    TET_PAUS,   TET_RES,
                                                                 XXXXXXX,    XXXXXXX,    XXXXXXX,    TET_LEFT,   TET_DOWN,    TET_RGHT
   ),
-  // Numpad doesn't make sense on a one shot layer.
-  // [L_FUN] = LAYOUT_moonlander(
-  //   QK_BOOT,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,                              KC_F7,      KC_F8,      KC_F9,      KC_F10,       KC_F11,     KC_F12,     _______,
-  //   MU_TOGG,    KC_VOLD,    KC_MPLY,    KC_VOLU,    TG(L_FUN),  TG(L_FUN),  TG(L_FUN),                          TG(L_FUN),  TG(L_FUN),  TG(L_FUN),  KC_P7,        KC_P8,      KC_P9,      KC_PAST,
-  //   MU_NEXT,    KC_MPRV,    KC_MSTP,    KC_MNXT,    TG(L_FUN),  TG(L_FUN),  TG(L_FUN),                          TG(L_FUN),  TG(L_FUN),  TG(L_FUN),  KC_P4,        KC_P5,      KC_P6,      KC_PMNS,
-  //   TG(L_FUN),  KC_SLEP,    KC_PWR,     TG(L_FUN),  TG(L_FUN),  TG(L_FUN),                                                  TG(L_FUN),  TG(L_FUN),  KC_P1,        KC_P2,      KC_P3,      KC_PPLS,
-  //   TG(L_FUN),  TG(L_FUN),  TG(L_FUN),  TG(L_FUN),  TG(L_FUN),              TG(L_FUN),                          TG(L_FUN),              TG(L_FUN),  KC_PSLS,      KC_P0,      KC_PDOT,    KC_PENT,
-  //                                                               RM_HUEU,    RM_HUED,    TG(L_FUN),  TG(L_FUN),  RM_SATU,    RM_SATD
-  // ),
 };
 
 #define KEY_OVERRIDE_SHIFT_OR_COMBO(NAME_NONE, NAME_SHIFT, FROM, TO) \
@@ -241,6 +240,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     case L_GAM:
       PLAY_SONG(sfx_mario_mushroom);
     case L_DEF:
+    case L_NUM:
     case L_FUN:
       rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_INVERSE_MULTISPLASH);
       break;
@@ -260,15 +260,15 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
   if (one_handed) {
     // Lose half of the LEDs, make them act differently
-    STATUS_LED_1(false);
-    STATUS_LED_2(IS_LAYER_ON_STATE(state, L_GAM));
+    STATUS_LED_1(IS_LAYER_ON_STATE(state, L_GAM));
+    STATUS_LED_2(false);
     STATUS_LED_3(false);
   } else {
     STATUS_LED_1(is_caps_word_on());
     STATUS_LED_2(false);
     STATUS_LED_3(false);
-    STATUS_LED_4(false);
-    STATUS_LED_5(IS_LAYER_ON_STATE(state, L_GAM));
+    STATUS_LED_4(IS_LAYER_ON_STATE(state, L_GAM));
+    STATUS_LED_5(IS_LAYER_ON_STATE(state, L_NUM));
     STATUS_LED_6(IS_LAYER_ON_STATE(state, L_FUN));
   }
 

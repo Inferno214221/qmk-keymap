@@ -35,8 +35,10 @@ RGB_MATRIX_EFFECT(INVERSE_MULTISPLASH)
 
 //                h   s   v   dh  ds  dv
 #define C_BLUE  {135,255,255,  8,  0,-40}
-#define C_BLACK {  0,255,  0,  0,  0, 40}
 #define C_RED   {  0,255,255,  0,  0,-60}
+#define C_OFF_R {  0,255,  0,  0,  0, 40}
+#define C_GREEN { 85,255,255,  0,  0, 40}
+#define C_OFF_G { 85,255,  0,  0,  0, 40}
 
 #define DEFAULT_RGB LED_LAYOUT_moonlander( \
     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,                             C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE,     C_BLUE, \
@@ -51,11 +53,19 @@ int16_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][6] = {
     [L_DEF] = DEFAULT_RGB,
     [L_FUN] = LED_LAYOUT_moonlander(
         C_RED,      C_RED,      C_RED,      C_RED,      C_RED,      C_RED,      C_RED,                              C_RED,      C_RED,      C_RED,      C_RED,      C_RED,      C_RED,      C_RED,
-        C_BLACK,    C_RED,      C_RED,      C_RED,      C_BLACK,    C_BLACK,    C_BLACK,                            C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_RED,      C_BLACK,    C_BLACK,
-        C_BLACK,    C_RED,      C_RED,      C_RED,      C_BLACK,    C_BLACK,    C_BLACK,                            C_BLACK,    C_BLACK,    C_BLACK,    C_RED,      C_RED,      C_RED,      C_BLACK,
-        C_BLACK,    C_RED,      C_RED,      C_BLACK,    C_BLACK,    C_BLACK,                                                    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,
-        C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,                C_BLACK,                            C_BLACK,                C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,
-                                                                    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK,    C_BLACK
+        C_OFF_R,    C_RED,      C_RED,      C_RED,      C_OFF_R,    C_OFF_R,    C_OFF_R,                            C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_RED,      C_OFF_R,    C_OFF_R,
+        C_OFF_R,    C_RED,      C_RED,      C_RED,      C_OFF_R,    C_OFF_R,    C_OFF_R,                            C_OFF_R,    C_OFF_R,    C_OFF_R,    C_RED,      C_RED,      C_RED,      C_OFF_R,
+        C_OFF_R,    C_RED,      C_RED,      C_OFF_R,    C_OFF_R,    C_OFF_R,                                                    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,
+        C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,                C_OFF_R,                            C_OFF_R,                C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,
+                                                                    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R,    C_OFF_R
+    ),
+    [L_NUM] = LED_LAYOUT_moonlander(
+        C_GREEN,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_GREEN,                            C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_GREEN,    C_GREEN,    C_GREEN,
+        C_GREEN,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_GREEN,                            C_GREEN,    C_OFF_G,    C_OFF_G,    C_GREEN,    C_GREEN,    C_GREEN,    C_GREEN,
+        C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,                            C_GREEN,    C_OFF_G,    C_OFF_G,    C_GREEN,    C_GREEN,    C_GREEN,    C_GREEN,
+        C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,    C_OFF_G,                                                    C_OFF_G,    C_OFF_G,    C_GREEN,    C_GREEN,    C_GREEN,    C_GREEN,
+        C_OFF_G,    C_OFF_G,    C_OFF_G,    C_GREEN,    C_GREEN,                C_OFF_G,                            C_OFF_G,                C_GREEN,    C_GREEN,    C_GREEN,    C_GREEN,    C_GREEN,
+                                                                    C_OFF_G,    C_GREEN,    C_OFF_G,    C_OFF_G,    C_GREEN,    C_GREEN
     ),
     [L_GAM] = DEFAULT_RGB,
     [L_TET] = DEFAULT_RGB
