@@ -34,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_HOME,                            KC_END,     KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       TG(L_GAM),
     KC_LGUI,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LALT,                            TG(L_NUM),  KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
     KC_GRV,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                                                       KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_AMPR,
-    _______,    KC_MINS,    KC_EQL,     KC_UP,      KC_DOWN,                LCTL(KC_X),                         LCTL(KC_V),             KC_LEFT,    KC_RGHT,    KC_QUES,    KC_ASTR,    KC_DEL,
+    QK_LEAD,    KC_MINS,    KC_EQL,     KC_UP,      KC_DOWN,                LCTL(KC_X),                         LCTL(KC_V),             KC_LEFT,    KC_RGHT,    KC_QUES,    KC_ASTR,    KC_DEL,
                                                                 KC_LSFT,    KC_BSPC,    KC_LCTL,    LCTL(KC_C), KC_SPC,     KC_ENT
   ),
   [L_FUN] = LAYOUT_moonlander(
@@ -265,7 +265,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     STATUS_LED_3(false);
   } else {
     STATUS_LED_1(is_caps_word_on());
-    STATUS_LED_2(false);
+    STATUS_LED_2(leader_sequence_active());
     STATUS_LED_3(false);
     STATUS_LED_4(IS_LAYER_ON_STATE(state, L_GAM));
     STATUS_LED_5(IS_LAYER_ON_STATE(state, L_NUM));
@@ -275,7 +275,33 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   return state;
 }
 
+void leader_start_user(void) {
+  STATUS_LED_2(true);
+}
 
+void leader_end_user(void) {
+  STATUS_LED_2(false);
+
+  if (leader_sequence_two_keys(KC_P, KC_M)) {
+    register_unicode(0x00B1);
+  } else if (leader_sequence_two_keys(KC_M, KC_U)) {
+    register_unicode(0x00B5);
+  } else if (leader_sequence_two_keys(KC_T, KC_M)) {
+    register_unicode(0x2122);
+  } else if (leader_sequence_three_keys(KC_D, KC_E, KC_G)) {
+    register_unicode(0x00B0);
+  } else if (leader_sequence_three_keys(KC_D, KC_I, KC_V)) {
+    register_unicode(0x00F7);
+  } else if (leader_sequence_three_keys(KC_G, KC_T, KC_E)) {
+    register_unicode(0x2265);
+  } else if (leader_sequence_three_keys(KC_L, KC_T, KC_E)) {
+    register_unicode(0x2264);
+  } else if (leader_sequence_three_keys(KC_A, KC_P, KC_R)) {
+    register_unicode(0x2248);
+  } else if (leader_sequence_five_keys(KC_T, KC_I, KC_M, KC_E, KC_S)) {
+    register_unicode(0x00D7);
+  }
+}
 
 void caps_word_set_user(bool active) {
   STATUS_LED_1(active);
