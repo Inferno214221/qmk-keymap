@@ -34,6 +34,7 @@ static auto_mouse_context_t auto_mouse_context = {
     .config.debounce = (uint8_t)(AUTO_MOUSE_DEBOUNCE),
 #ifdef AUTO_MOUSE_ONESHOT
     .one_shot = false,
+    .one_shot_triggered = false,
 #endif
 };
 
@@ -55,10 +56,6 @@ bool is_auto_mouse_active(void) {
 #ifdef AUTO_MOUSE_ONESHOT
     return auto_mouse_context.status.is_activated || auto_mouse_context.status.mouse_key_tracker || layer_hold_check() || auto_mouse_context.one_shot;
 #else
-    printf("is_auto_mouse_active\n");
-    printf("is_activated: %d\n", auto_mouse_context.status.is_activated);
-    printf("mouse_key_tracker: %d\n", auto_mouse_context.status.mouse_key_tracker);
-    printf("layer_hold_check: %d\n", layer_hold_check());
     return auto_mouse_context.status.is_activated || auto_mouse_context.status.mouse_key_tracker || layer_hold_check();
 #endif
 }
@@ -283,7 +280,13 @@ void pointing_device_task_auto_mouse(report_mouse_t mouse_report) {
     }
     // update activation and reset debounce
     auto_mouse_context.status.is_activated = auto_mouse_activation(mouse_report);
-    if (is_auto_mouse_active()) {
+    // Check for actual activity (mouse movement, held mouse keys, or layer hold)
+    // Also include one_shot that hasn't been triggered yet (keeps layer alive until first key press)
+    bool has_activity = auto_mouse_context.status.is_activated || auto_mouse_context.status.mouse_key_tracker || layer_hold_check();
+#ifdef AUTO_MOUSE_ONESHOT
+    has_activity = has_activity || (auto_mouse_context.one_shot && !auto_mouse_context.one_shot_triggered);
+#endif
+    if (has_activity) {
         auto_mouse_context.total_mouse_movement = (total_mouse_movement_t){.x = 0, .y = 0, .h = 0, .v = 0};
         auto_mouse_context.timer.active         = timer_read();
         auto_mouse_context.timer.delay          = 0;
@@ -291,9 +294,9 @@ void pointing_device_task_auto_mouse(report_mouse_t mouse_report) {
             layer_on((AUTO_MOUSE_TARGET_LAYER));
         }
 #ifdef AUTO_MOUSE_ONESHOT
-                if (!auto_mouse_context.one_shot) {
-                    auto_mouse_context.one_shot = true;
-                }
+        if (!auto_mouse_context.one_shot) {
+            auto_mouse_context.one_shot = true;
+        }
 #endif
     } else if (layer_state_is((AUTO_MOUSE_TARGET_LAYER)) && timer_elapsed(auto_mouse_context.timer.active) > auto_mouse_context.config.timeout) {
 #ifdef LAYER_LOCK_ENABLE
@@ -302,6 +305,10 @@ void pointing_device_task_auto_mouse(report_mouse_t mouse_report) {
         layer_off((AUTO_MOUSE_TARGET_LAYER));
         auto_mouse_context.timer.active         = 0;
         auto_mouse_context.total_mouse_movement = (total_mouse_movement_t){.x = 0, .y = 0, .h = 0, .v = 0};
+#ifdef AUTO_MOUSE_ONESHOT
+        auto_mouse_context.one_shot = false;
+        auto_mouse_context.one_shot_triggered = false;
+#endif
     }
 }
 
@@ -449,17 +456,17 @@ bool process_auto_mouse(uint16_t keycode, keyrecord_t* record) {
                 // all non-mousekey presses restart delay timer and reset status
                 auto_mouse_reset_trigger(record->event.pressed);
             }
+#ifdef AUTO_MOUSE_ONESHOT
+            else if (auto_mouse_context.one_shot && !auto_mouse_context.one_shot_triggered && record->event.pressed) {
+                // First non-mouse key press while one_shot is active - start the countdown
+                auto_mouse_context.one_shot_triggered = true;
+            }
+#endif
     }
     if (auto_mouse_context.status.mouse_key_tracker < 0) {
         auto_mouse_context.status.mouse_key_tracker = 0;
         dprintf("key tracker error (<0) \n");
     }
-
-#ifdef AUTO_MOUSE_ONESHOT
-    if (is_auto_mouse_active()) {
-        auto_mouse_context.one_shot = false;
-    }
-#endif
 
     return true;
 }

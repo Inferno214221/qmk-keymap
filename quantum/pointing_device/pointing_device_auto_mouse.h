@@ -75,6 +75,7 @@ typedef struct {
     total_mouse_movement_t total_mouse_movement;
 #ifdef AUTO_MOUSE_ONESHOT
     bool one_shot;
+    bool one_shot_triggered;
 #endif
 } auto_mouse_context_t;
 
