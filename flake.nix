@@ -23,6 +23,7 @@
               python3Packages.appdirs
             ];
           }))
+          clang-tools
         ] ++ buildInputs;
       in with pkgs; rec
       {

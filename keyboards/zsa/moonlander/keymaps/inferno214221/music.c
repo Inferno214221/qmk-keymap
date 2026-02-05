@@ -1,3 +1,7 @@
+#include QMK_KEYBOARD_H
+
+#include "custom_keycodes.h"
+
 #include "audio.h"
 
 float song_tetris_theme[][2] = SONG(TETRIS_THEME);
@@ -73,4 +77,27 @@ void song_prev(void) {
     song_index--;
   }
   song_play();
+}
+
+bool music_on_process_record(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    // Keyboard-level Music Controls
+    case KM_PLAY:
+      if (record->event.pressed) song_play();
+      return false;
+    case KM_STOP:
+      if (record->event.pressed) song_stop();
+      return false;
+    case KM_NEXT:
+      if (record->event.pressed) song_next();
+      return false;
+    case KM_PREV:
+      if (record->event.pressed) song_prev();
+      return false;
+  }
+  return true;
+}
+
+void music_on_layer_set_gaming(void) {
+  PLAY_SONG(sfx_mario_mushroom);
 }

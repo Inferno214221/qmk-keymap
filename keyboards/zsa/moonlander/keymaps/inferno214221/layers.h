@@ -1,3 +1,5 @@
+#pragma once
+
 #define L_DEF 0
 #define L_FUN 1
 #define L_NUM 2

@@ -12,5 +12,10 @@ AUDIO_ENABLE = yes
 LEADER_ENABLE = yes
 UNICODE_COMMON = yes
 
-SRC += tetris.c
+SRC += inactivity.c
+SRC += launch_tetris.c
+SRC += led_indicators.c
 SRC += music.c
+SRC += one_handed.c
+SRC += tetris.c
+SRC += unicode_leader.c
