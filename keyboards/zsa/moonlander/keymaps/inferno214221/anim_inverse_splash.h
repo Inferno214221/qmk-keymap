@@ -4,6 +4,8 @@ RGB_MATRIX_EFFECT(INVERSE_MULTISPLASH)
 
 #    ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
+#include <string.h>
+
 #include "layers.h"
 #include "keymap_common.h"
 
@@ -71,38 +73,67 @@ hsv_t inverse_splash_math(hsv_t hsv, hsv_delta_t delta, int16_t dx, int16_t dy, 
     return hsv;
 }
 
+void apply_inverse_splash(uint8_t i, uint8_t count, hsv_t hsv, hsv_delta_t delta) {
+    for (uint8_t j = 0; j < count; j++) {
+        int16_t  dx   = g_led_config.point[i].x - g_last_hit_tracker.x[j];
+        int16_t  dy   = g_led_config.point[i].y - g_last_hit_tracker.y[j];
+        uint8_t  dist = sqrt16(dx * dx + dy * dy);
+        uint16_t tick = scale16by8(g_last_hit_tracker.tick[j], qadd8(rgb_matrix_config.speed, 1));
+        hsv           = inverse_splash_math(hsv, delta, dx, dy, dist, tick);
+    }
+    hsv.v     = scale8(hsv.v, rgb_matrix_config.hsv.v);
+    rgb_t rgb = rgb_matrix_hsv_to_rgb(hsv);
+    rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
+}
+
 bool INVERSE_MULTISPLASH(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
 
+    uint8_t count = g_last_hit_tracker.count;
+
     uint8_t highest = get_highest_layer(layer_state);
 
-    uint8_t count = g_last_hit_tracker.count;
-    for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
-        for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
-            uint8_t i = g_led_config.matrix_co[row][col];
+    hsv_t hsvs[] = {
+        {
+            .h = pgm_read_byte(&led_layers[highest][0][0]),
+            .s = 255,
+            .v = pgm_read_byte(&led_layers[highest][0][1]),
+        },
+        {
+            .h = pgm_read_byte(&led_layers[highest][1][0]),
+            .s = 255,
+            .v = pgm_read_byte(&led_layers[highest][1][1]),
+        }
+    };
 
-            bool use_secondary = keymap_key_to_keycode(highest, (keypos_t){col,row}) == KC_NO;
+    hsv_delta_t deltas[] = {
+        {
+            .h = pgm_read_byte(&led_layers[highest][0][2]),
+            .v = pgm_read_byte(&led_layers[highest][0][3]),
+        },
+        {
+            .h = pgm_read_byte(&led_layers[highest][1][2]),
+            .v = pgm_read_byte(&led_layers[highest][1][3]),
+        }
+    };
 
-            hsv_t hsv = {
-                .h = pgm_read_byte(&led_layers[highest][use_secondary][0]),
-                .s = 255,
-                .v = pgm_read_byte(&led_layers[highest][use_secondary][1]),
-            };
-            hsv_delta_t delta = {
-                .h = pgm_read_byte(&led_layers[highest][use_secondary][2]),
-                .v = pgm_read_byte(&led_layers[highest][use_secondary][3]),
-            };
+    // Check for primary == secondary and if so, revert to i iteration and avoid keymap reads.
+    if (
+        memcmp(&hsvs[0], &hsvs[1], sizeof(struct hsv_t)) == 0
+        && memcmp(&deltas[0], &deltas[1], sizeof(struct hsv_delta_t)) == 0
+    ) {
+        for (uint8_t i = led_min; i < led_max; i++) {
+            apply_inverse_splash(i, count, hsvs[0], deltas[0]);
+        }
+    } else {
+        for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
+            for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
+                uint8_t i = g_led_config.matrix_co[row][col];
 
-            for (uint8_t j = 0; j < count; j++) {
-                int16_t  dx   = g_led_config.point[i].x - g_last_hit_tracker.x[j];
-                int16_t  dy   = g_led_config.point[i].y - g_last_hit_tracker.y[j];
-                uint8_t  dist = sqrt16(dx * dx + dy * dy);
-                uint16_t tick = scale16by8(g_last_hit_tracker.tick[j], qadd8(rgb_matrix_config.speed, 1));
-                hsv           = inverse_splash_math(hsv, delta, dx, dy, dist, tick);
+                bool use_secondary = keymap_key_to_keycode(highest, (keypos_t){col,row}) == KC_NO;
+                
+                apply_inverse_splash(i, count, hsvs[use_secondary], deltas[use_secondary]);
             }
-            hsv.v     = scale8(hsv.v, rgb_matrix_config.hsv.v);
-            rgb_t rgb = rgb_matrix_hsv_to_rgb(hsv);
-            rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
         }
     }
     return rgb_matrix_check_finished_leds(led_max);

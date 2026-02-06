@@ -6,17 +6,20 @@
 #endif
 
 enum custom_keycodes {
-  // Keyboard-level Music Controls
+  // Keyboard-level music controls
   KM_PLAY = ZSA_SAFE_RANGE,
   KM_STOP,
   KM_NEXT,
   KM_PREV,
 
-  // Tetris Keycodes
+  // Tetris keycodes
   TET_LEFT,
   TET_RGHT,
   TET_DOWN,
   TET_ROT,
   TET_RES,
-  TET_PAUS
+  TET_PAUS,
+
+  // No-op key that maintains lighting (!= KC_NO)
+  ALT_NO
 };
