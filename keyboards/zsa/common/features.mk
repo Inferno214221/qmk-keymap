@@ -1,1 +1,0 @@
-VPATH += keyboards/zsa/common
