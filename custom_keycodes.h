@@ -21,5 +21,8 @@ enum custom_keycodes {
   TET_PAUS,
 
   // No-op key that maintains lighting (!= KC_NO)
-  ALT_NO
+  INF_NULL
 };
+
+// Tap hold keycodes
+#define TH_ALTU LT(0, 0)
