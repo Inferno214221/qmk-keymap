@@ -57,3 +57,11 @@ void caps_word_set_user(bool active) {
 void housekeeping_task_user(void) {
   one_handed_on_housekeeping_task();
 }
+
+void audio_on_user(void) {
+  led_indicators_on_audio_on();
+}
+
+void audio_off_user(void) {
+  led_indicators_on_audio_off();
+}
