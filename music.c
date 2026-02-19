@@ -4,58 +4,54 @@
 
 #include "audio.h"
 
-float song_tetris_theme[][2] = SONG(TETRIS_THEME);
-float song_imperial_march[][2] = SONG(IMPERIAL_MARCH);
-float sfx_coin[][2] = SONG(COIN_SOUND);
-float sfx_one_up[][2] = SONG(ONE_UP_SOUND);
-float sfx_zelda_puzzle[][2] = SONG(ZELDA_PUZZLE);
-float sfx_zelda_treasure[][2] = SONG(ZELDA_TREASURE);
-float song_mario_theme[][2] = SONG(MARIO_THEME);
-float sfx_mario_mushroom[][2] = SONG(MARIO_MUSHROOM);
-float song_e1m1_doom[][2] = SONG(E1M1_DOOM);
-float song_rick_roll[][2] = SONG(RICK_ROLL);
-float song_megalovania[][2] = SONG(MEGALOVANIA);
+float sfx_mario_coin      [][2] = SONG(COIN_SOUND);
+float sfx_mario_mushroom  [][2] = SONG(MARIO_MUSHROOM);
+float sfx_mario_one_up    [][2] = SONG(ONE_UP_SOUND);
+float sfx_zelda_puzzle    [][2] = SONG(ZELDA_PUZZLE);
+float sfx_zelda_treasure  [][2] = SONG(ZELDA_TREASURE);
+float song_e1m1_doom      [][2] = SONG(E1M1_DOOM);
+float song_imperial_march [][2] = SONG(IMPERIAL_MARCH);
+float song_mario_theme    [][2] = SONG(MARIO_THEME);
+float song_megalovania    [][2] = SONG(MEGALOVANIA);
+float song_rick_roll      [][2] = SONG(RICK_ROLL);
+float song_tetris_theme   [][2] = SONG(TETRIS_THEME);
+
+// Effectively a &[[f32; 2]]
+typedef struct {
+  // In Rust this would read something like &[[f32; 2]; _] because C types are read starting from
+  // the identifier. I'm not entirely sure why its valid to take a pointer to an implicitly sized
+  // array, rather than the first element itself but that's what audio_play_melody expects. It's
+  // essentially a slice without a length anyway.
+  float (*notes)[][2];
+  uint16_t len;
+} song_slice_t;
+
+#define SONG_SLICE(song) \
+{ \
+  .notes = &song, \
+  .len = ARRAY_SIZE(song) \
+}
+
+song_slice_t songs[] = {
+  SONG_SLICE(song_e1m1_doom),
+  SONG_SLICE(song_megalovania),
+  SONG_SLICE(song_rick_roll),
+  SONG_SLICE(song_tetris_theme),
+  SONG_SLICE(song_mario_theme),
+  SONG_SLICE(song_imperial_march),
+  SONG_SLICE(sfx_zelda_puzzle),
+  SONG_SLICE(sfx_zelda_treasure),
+  SONG_SLICE(sfx_mario_coin),
+  SONG_SLICE(sfx_mario_one_up),
+  SONG_SLICE(sfx_mario_mushroom),
+};
 
 static uint8_t song_index = 0;
 
-#define SONG_COUNT 11
+#define PLAY_SONG_SLICE(song) audio_play_melody(song.notes, song.len, false)
 
 void song_play(void) {
-  switch (song_index) {
-    case 0:
-      PLAY_SONG(song_tetris_theme);
-      break;
-    case 1:
-      PLAY_SONG(song_imperial_march);
-      break;
-    case 2:
-      PLAY_SONG(sfx_coin);
-      break;
-    case 3:
-      PLAY_SONG(sfx_one_up);
-      break;
-    case 4:
-      PLAY_SONG(sfx_zelda_puzzle);
-      break;
-    case 5:
-      PLAY_SONG(sfx_zelda_treasure);
-      break;
-    case 6:
-      PLAY_SONG(song_mario_theme);
-      break;
-    case 7:
-      PLAY_SONG(sfx_mario_mushroom);
-      break;
-    case 8:
-      PLAY_SONG(song_e1m1_doom);
-      break;
-    case 9:
-      PLAY_SONG(song_rick_roll);
-      break;
-    case 10:
-      PLAY_SONG(song_megalovania);
-      break;
-  }
+  PLAY_SONG_SLICE(songs[song_index]);
 }
 
 void song_stop(void) {
@@ -64,7 +60,7 @@ void song_stop(void) {
 
 void song_next(void) {
   song_index++;
-  if (song_index >= SONG_COUNT) {
+  if (song_index >= ARRAY_SIZE(songs)) {
     song_index = 0;
   }
   song_play();
@@ -72,7 +68,7 @@ void song_next(void) {
 
 void song_prev(void) {
   if (song_index == 0) {
-    song_index = SONG_COUNT - 1;
+    song_index = ARRAY_SIZE(songs) - 1;
   } else {
     song_index--;
   }
