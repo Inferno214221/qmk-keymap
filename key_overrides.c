@@ -23,7 +23,7 @@ const key_override_t NAME = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, FROM
 KEY_OVERRIDE_SHIFT(o_comm_at,   KC_COMM, KC_AT);
 KEY_OVERRIDE_SHIFT(o_dot_circ,  KC_DOT,  KC_CIRC);
 KEY_OVERRIDE_SHIFT(o_slsh_bsls, KC_SLSH, KC_BSLS);
-KEY_OVERRIDE_SHIFT(o_ques_exlm, KC_QUES, KC_EXLM);
+KEY_OVERRIDE_SHIFT(o_exlm_ques, KC_EXLM, KC_QUES);
 KEY_OVERRIDE_SHIFT(o_ampr_pipe, KC_AMPR, KC_PIPE);
 KEY_OVERRIDE_SHIFT(o_astr_perc, KC_ASTR, KC_PERC);
 
@@ -52,7 +52,7 @@ const key_override_t *key_overrides[] = {
   &o_comm_at,
   &o_dot_circ,
   &o_slsh_bsls,
-  &o_ques_exlm,
+  &o_exlm_ques,
   &o_ampr_pipe,
   &o_astr_perc,
 };
