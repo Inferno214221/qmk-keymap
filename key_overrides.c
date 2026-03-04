@@ -8,9 +8,9 @@ const key_override_t NAME_SHIFT = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT
 
 KEY_OVERRIDE_SHIFT_OR_COMBO(o_lcbr_1_none, o_lcbr_1_shift, KC_1, KC_LCBR);
 KEY_OVERRIDE_SHIFT_OR_COMBO(o_rcbr_2_none, o_rcbr_2_shift, KC_2, KC_RCBR);
-KEY_OVERRIDE_SHIFT_OR_COMBO(o_dlr_3_none,  o_dlr_3_shift,  KC_3, KC_DLR);
-KEY_OVERRIDE_SHIFT_OR_COMBO(o_labk_4_none, o_labk_4_shift, KC_4, KC_LABK);
-KEY_OVERRIDE_SHIFT_OR_COMBO(o_rabk_5_none, o_rabk_5_shift, KC_5, KC_RABK);
+KEY_OVERRIDE_SHIFT_OR_COMBO(o_labk_3_none, o_dlr_3_shift,  KC_3, KC_LABK);
+KEY_OVERRIDE_SHIFT_OR_COMBO(o_rabk_4_none, o_labk_4_shift, KC_4, KC_RABK);
+KEY_OVERRIDE_SHIFT_OR_COMBO(o_dlr_5_none,  o_rabk_5_shift, KC_5, KC_DLR);
 KEY_OVERRIDE_SHIFT_OR_COMBO(o_lbrc_6_none, o_lbrc_6_shift, KC_6, KC_LBRC);
 KEY_OVERRIDE_SHIFT_OR_COMBO(o_rbrc_7_none, o_rbrc_7_shift, KC_7, KC_RBRC);
 KEY_OVERRIDE_SHIFT_OR_COMBO(o_hash_8_none, o_hash_8_shift, KC_8, KC_HASH);
@@ -32,11 +32,11 @@ const key_override_t *key_overrides[] = {
   &o_lcbr_1_shift,
   &o_rcbr_2_none,
   &o_rcbr_2_shift,
-  &o_dlr_3_none,
+  &o_labk_3_none,
   &o_dlr_3_shift,
-  &o_labk_4_none,
+  &o_rabk_4_none,
   &o_labk_4_shift,
-  &o_rabk_5_none,
+  &o_dlr_5_none,
   &o_rabk_5_shift,
   &o_lbrc_6_none,
   &o_lbrc_6_shift,

@@ -12,7 +12,7 @@
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_DEF] = LAYOUT_moonlander(
     // These numbers aren't actually numbers unless shifted. See key_overrides for more info.
-    //          KC_LCBR,    KC_RCBR,    KC_DLR,     KC_LABK,    KC_RABK,                                                    KC_LBRC,    KC_RBRC,    KC_HASH,    KC_LPRN,    KC_RPRN,
+    //          KC_LCBR,    KC_RCBR,    KC_LABK,    KC_RABK,    KC_DLR,                                                     KC_LBRC,    KC_RBRC,    KC_HASH,    KC_LPRN,    KC_RPRN,
     KC_ESC,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_CALC,                            KC_PSCR,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       OSL(L_FUN),
     KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_HOME,                            KC_END,     KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       XXXXXXX,
     KC_LGUI,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       TH_ALTU,                            TG(L_NUM),  KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
@@ -33,8 +33,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,                            _______,    XXXXXXX,    XXXXXXX,    KC_P7,      KC_P8,      KC_P9,      KC_PSLS,
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            _______,    XXXXXXX,    XXXXXXX,    KC_P4,      KC_P5,      KC_P6,      KC_PAST,
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                                                    XXXXXXX,    XXXXXXX,    KC_P1,      KC_P2,      KC_P3,      KC_PMNS,
-    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,    _______,                XXXXXXX,                            XXXXXXX,                _______,    _______,    KC_P0,      KC_PDOT,    KC_PPLS,
-                                                                XXXXXXX,    _______,    XXXXXXX,    XXXXXXX,    _______,    _______
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,    _______,                XXXXXXX,                            _______,                _______,    _______,    KC_PDOT,    KC_P0,      KC_PPLS,
+                                                                XXXXXXX,    _______,    XXXXXXX,    _______,    _______,    _______
   ),
   [L_GAM] = LAYOUT_moonlander(
     KC_ESC,     _______,    _______,    _______,    _______,    _______,    XXXXXXX,                            G(KC_PSCR), _______,    _______,    _______,    _______,    _______,    TO(L_DEF),
