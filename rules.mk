@@ -11,7 +11,7 @@ KEY_OVERRIDE_ENABLE = yes
 AUDIO_ENABLE = yes
 LEADER_ENABLE = yes
 UNICODE_COMMON = yes
-# TAP_DANCE_ENABLE = yes
+TAP_DANCE_ENABLE = yes
 
 SRC += inactivity.c
 SRC += launch_tetris.c
