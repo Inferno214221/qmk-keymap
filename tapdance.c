@@ -1,5 +1,7 @@
 #include QMK_KEYBOARD_H
 
+#include "sounds.h"
+
 enum custom_tapdance {
   T_COPY
 };
@@ -11,6 +13,7 @@ void tap_copy_cut_each(tap_dance_state_t *state, void *user_data) {
   } else {
     unregister_code(KC_C);
     register_code(KC_X);
+    sounds_on_alt_key_press();
   }
 }
 

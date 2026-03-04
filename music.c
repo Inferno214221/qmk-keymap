@@ -93,7 +93,3 @@ bool music_on_process_record(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
-
-void music_on_layer_set_gaming(void) {
-  PLAY_SONG(sfx_mario_mushroom);
-}

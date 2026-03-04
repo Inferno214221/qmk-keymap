@@ -18,6 +18,7 @@ SRC += launch_tetris.c
 SRC += led_indicators.c
 SRC += music.c
 SRC += one_handed.c
+SRC += sounds.c
 SRC += tap_hold.c
 SRC += tetris.c
 SRC += unicode_leader.c
