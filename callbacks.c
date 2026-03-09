@@ -7,6 +7,7 @@
 #include "led_indicators.h"
 #include "music.h"
 #include "one_handed.h"
+#include "smart_brackets.h"
 #include "sounds.h"
 #include "tap_hold.h"
 #include "unicode_leader.h"
@@ -19,6 +20,7 @@ void keyboard_post_init_user(void) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   inactivity_on_proccess_record();
   return tap_hold_on_process_record(keycode, record)
+    && smart_brackets_on_process_record(keycode, record)
     && music_on_process_record(keycode, record)
     && tetris_on_process_record(keycode, record);
 }

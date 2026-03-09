@@ -21,7 +21,16 @@ enum custom_keycodes {
   TET_PAUS,
 
   // No-op key that maintains lighting (!= KC_NO)
-  INF_NULL
+  INF_NULL,
+
+  // Paired keys
+  PR_PAREN,
+  PR_BRACK,
+  PR_BRACE,
+  PR_ANGLE,
+  PR_QUOTE,
+  PR_BTICK,
+  PR_AMPIP,
 };
 
 // Tap hold keycodes
