@@ -89,7 +89,9 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
                 tap_code(KC_QUOTE);
                 if (get_mods() & MOD_BIT_LSHIFT) {
                     tap_code(KC_QUOTE);
+                    unregister_code(KC_LEFT_SHIFT);
                     tap_code(KC_LEFT);
+                    register_code(KC_LEFT_SHIFT);
                 }
             }
             return false;
