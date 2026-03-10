@@ -11,3 +11,5 @@ void sounds_on_leader_end(void);
 void sounds_on_caps_word_set(bool active);
 
 void sounds_on_alt_key_press(void);
+
+void skip_next_sound(void);

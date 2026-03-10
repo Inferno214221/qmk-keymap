@@ -3,6 +3,7 @@
 #include "layers.h"
 
 #include "inactivity.h"
+#include "sounds.h"
 
 static deferred_token inactivity_token;
 
@@ -31,8 +32,11 @@ void inactivity_on_proccess_record(void) {
   switch (inactivity_state) {
     case STATE_FADING_OUT:
       cancel_deferred_exec(fade_out_timer);
+      skip_next_sound();
+      layer_move(L_DEF);
     case STATE_SLEEP:
       inactivity_token = defer_exec(INACTIVITY_TIMEOUT, on_keyboard_inactivity, NULL);
+      skip_next_sound();
       layer_move(L_DEF);
     default:
       break;

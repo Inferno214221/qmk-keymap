@@ -57,3 +57,7 @@ void sounds_on_caps_word_set(bool active) {
 void sounds_on_alt_key_press(void) {
   PLAY_SONG(sfx_alt_key_press);
 }
+
+void skip_next_sound(void) {
+  skip_sound = true;
+}
