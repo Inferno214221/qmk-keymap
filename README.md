@@ -12,4 +12,8 @@ Features include:
 - Eager tapdance behaviour.
 - Trial key overrides for programming, inspired by DVORAK programmer:
 
-![layout](./layout.png)
+![Layout](./layout.png)
+
+_As opposed to this semi-default keymap, which I derive from the keyboard's shape itself:_
+
+![Default Layout](./layout-default.png)
