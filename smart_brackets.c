@@ -2,78 +2,83 @@
 
 #include "custom_keycodes.h"
 
-// TODO: Avoid double taps following a '\'.
+#include "last_key.h"
+
+#define MODS_ANY get_mods()
+#define MODS_SHIFT (get_mods() & MOD_BIT_LSHIFT)
+#define SHIFTED_SLASH S(KC_SLASH)
+
+void unshifted_tap(uint8_t key) {
+  bool was_shifted = MODS_SHIFT;
+  unregister_code(KC_LEFT_SHIFT);
+  tap_code(key);
+  if (was_shifted) {
+    register_code(KC_LEFT_SHIFT);
+  }
+}
 
 bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
-  static uint16_t last_keycode;
   switch (keycode) {
     // This has no hold functionality at the moment.
     case PR_PAREN:
       if (record->event.pressed) {
-        if (get_mods()) {
-          bool was_shifted = get_mods() & MOD_BIT_LSHIFT;
-          unregister_code(KC_LEFT_SHIFT);
-          tap_code(KC_9);
-          if (was_shifted) {
-            register_code(KC_LEFT_SHIFT);
-          }
+        if (MODS_ANY) {
+          unshifted_tap(KC_9);
         } else {
           register_code(KC_LEFT_SHIFT);
           tap_code(KC_9);
-          tap_code(KC_0);
-          unregister_code(KC_LEFT_SHIFT);
-          tap_code(KC_LEFT);
+
+          if (get_last_key() != SHIFTED_SLASH) {
+            tap_code(KC_0);
+            unregister_code(KC_LEFT_SHIFT);
+            tap_code(KC_LEFT);
+          } else {
+            unregister_code(KC_LEFT_SHIFT);
+          }
         }
-        last_keycode = keycode;
       }
       return false;
+
     case PR_BRACK:
       if (record->event.pressed) {
-        if (get_mods()) {
-          bool was_shifted = get_mods() & MOD_BIT_LSHIFT;
-          unregister_code(KC_LEFT_SHIFT);
-          tap_code(KC_7);
-          if (was_shifted) {
-            register_code(KC_LEFT_SHIFT);
-          }
+        if (MODS_ANY) {
+          unshifted_tap(KC_7);
         } else {
           tap_code(KC_LEFT_BRACKET);
-          tap_code(KC_RIGHT_BRACKET);
-          tap_code(KC_LEFT);
+
+          if (get_last_key() != SHIFTED_SLASH) {
+            tap_code(KC_RIGHT_BRACKET);
+            tap_code(KC_LEFT);
+          }
         }
-        last_keycode = keycode;
       }
       return false;
+
     case PR_BRACE:
       if (record->event.pressed) {
-        if (get_mods()) {
-          bool was_shifted = get_mods() & MOD_BIT_LSHIFT;
-          unregister_code(KC_LEFT_SHIFT);
-          tap_code(KC_1);
-          if (was_shifted) {
-            register_code(KC_LEFT_SHIFT);
-          }
+        if (MODS_ANY) {
+          unshifted_tap(KC_1);
         } else {
           register_code(KC_LEFT_SHIFT);
           tap_code(KC_LEFT_BRACKET);
-          tap_code(KC_RIGHT_BRACKET);
-          unregister_code(KC_LEFT_SHIFT);
-          tap_code(KC_LEFT);
+
+          if (get_last_key() != SHIFTED_SLASH) {
+            tap_code(KC_RIGHT_BRACKET);
+            unregister_code(KC_LEFT_SHIFT);
+            tap_code(KC_LEFT);
+          } else {
+            unregister_code(KC_LEFT_SHIFT);
+          }
         }
-        last_keycode = keycode;
       }
       return false;
+
     case PR_ANGLE:
       if (record->event.pressed) {
-        if (get_mods()) {
-          bool was_shifted = get_mods() & MOD_BIT_LSHIFT;
-          unregister_code(KC_LEFT_SHIFT);
-          tap_code(KC_3);
-          if (was_shifted) {
-            register_code(KC_LEFT_SHIFT);
-          }
+        if (MODS_ANY) {
+          unshifted_tap(KC_3);
         } else {
-          switch (last_keycode) {
+          switch (get_last_key()) {
             case KC_A ... KC_Z:
               register_code(KC_LEFT_SHIFT);
               tap_code(KC_COMMA);
@@ -86,36 +91,38 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
               break;
           }
         }
-        last_keycode = keycode;
       }
       return false;
+
     case PR_QUOTE:
       if (record->event.pressed) {
         tap_code(KC_QUOTE);
-        if (get_mods() & MOD_BIT_LSHIFT) {
+
+        if (MODS_SHIFT && get_last_key() != SHIFTED_SLASH) {
           tap_code(KC_QUOTE);
           unregister_code(KC_LEFT_SHIFT);
           tap_code(KC_LEFT);
           register_code(KC_LEFT_SHIFT);
         }
-        last_keycode = keycode;
       }
       return false;
     case PR_BTICK:
       if (record->event.pressed) {
         tap_code(KC_GRAVE);
-        if (!(get_mods() & MOD_BIT_LSHIFT)) {
+
+        if (!MODS_SHIFT && get_last_key() != SHIFTED_SLASH) {
           tap_code(KC_GRAVE);
           tap_code(KC_LEFT);
         }
-        last_keycode = keycode;
       }
       return false;
+
     case PR_AMPIP:
       if (record->event.pressed) {
-        if (get_mods() & MOD_BIT_LSHIFT) {
+        if (MODS_SHIFT) {
           tap_code(KC_BACKSLASH);
-          switch (last_keycode) {
+
+          switch (get_last_key()) {
             case PR_PAREN:
             case KC_TAB:
               tap_code(KC_BACKSLASH);
@@ -127,11 +134,10 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
         } else {
           tap_code16(KC_AMPERSAND);
         }
-        last_keycode = keycode;
       }
       return false;
+
     default:
-      if (record->event.pressed && keycode != KC_LEFT_SHIFT) last_keycode = keycode;
       return true;
   }
 }

@@ -3,6 +3,7 @@
 #include "layers.h"
 
 #include "inactivity.h"
+#include "last_key.h"
 #include "launch_tetris.h"
 #include "led_indicators.h"
 #include "music.h"
@@ -23,10 +24,15 @@ void matrix_init_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   inactivity_on_proccess_record();
-  return tap_hold_on_process_record(keycode, record)
+  
+  bool res = tap_hold_on_process_record(keycode, record)
     && smart_brackets_on_process_record(keycode, record)
     && music_on_process_record(keycode, record)
     && tetris_on_process_record(keycode, record);
+
+  last_key_on_process_record(keycode, record);
+
+  return res;
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {

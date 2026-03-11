@@ -14,6 +14,7 @@ UNICODE_COMMON = yes
 TAP_DANCE_ENABLE = yes
 
 SRC += inactivity.c
+SRC += last_key.c
 SRC += launch_tetris.c
 SRC += led_indicators.c
 SRC += music.c
