@@ -20,6 +20,14 @@ void sounds_on_keyboard_post_init(void) {
   skip_sound = true;
 }
 
+// matrix_init occurs before the startup song.
+void sounds_on_matrix_init(void) {
+  // 0, 0 should be escape. If it is held, turn off audio on startup.
+  if (matrix_is_on(0, 0)) {
+    audio_off();
+  }
+}
+
 void sounds_on_layer_set_state(layer_state_t state) {
   if (skip_sound) {
     skip_sound = false;

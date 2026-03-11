@@ -17,6 +17,10 @@ void keyboard_post_init_user(void) {
   sounds_on_keyboard_post_init();
 }
 
+void matrix_init_user(void) {
+  sounds_on_matrix_init();
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   inactivity_on_proccess_record();
   return tap_hold_on_process_record(keycode, record)
