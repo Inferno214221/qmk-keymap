@@ -5,19 +5,17 @@
 #include "last_key.h"
 
 #define MODS_ANY get_mods()
-#define MODS_SHIFT (get_mods() & MOD_BIT_LSHIFT)
-#define SHIFTED_SLASH S(KC_SLASH)
+// #define MODS_SHIFT (get_mods() & MOD_BIT_LSHIFT)
+#define KEY_COMBO_BACKSLASH S(KC_SLASH)
 
 void unshifted_tap(uint8_t key) {
-  bool was_shifted = MODS_SHIFT;
   unregister_code(KC_LEFT_SHIFT);
   tap_code(key);
-  if (was_shifted) {
-    register_code(KC_LEFT_SHIFT);
-  }
+  restore_shift();
 }
 
 bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
+  // manually strack shift status and then impl accurate holding functionality.
   switch (keycode) {
     // This has no hold functionality at the moment.
     case PR_PAREN:
@@ -28,7 +26,7 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
           register_code(KC_LEFT_SHIFT);
           tap_code(KC_9);
 
-          if (get_last_key() != SHIFTED_SLASH) {
+          if (get_last_key() != KEY_COMBO_BACKSLASH) {
             tap_code(KC_0);
             unregister_code(KC_LEFT_SHIFT);
             tap_code(KC_LEFT);
@@ -46,7 +44,7 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
         } else {
           tap_code(KC_LEFT_BRACKET);
 
-          if (get_last_key() != SHIFTED_SLASH) {
+          if (get_last_key() != KEY_COMBO_BACKSLASH) {
             tap_code(KC_RIGHT_BRACKET);
             tap_code(KC_LEFT);
           }
@@ -62,7 +60,7 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
           register_code(KC_LEFT_SHIFT);
           tap_code(KC_LEFT_BRACKET);
 
-          if (get_last_key() != SHIFTED_SLASH) {
+          if (get_last_key() != KEY_COMBO_BACKSLASH) {
             tap_code(KC_RIGHT_BRACKET);
             unregister_code(KC_LEFT_SHIFT);
             tap_code(KC_LEFT);
@@ -98,7 +96,7 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         tap_code(KC_QUOTE);
 
-        if (MODS_SHIFT && get_last_key() != SHIFTED_SLASH) {
+        if (is_shifted() && get_last_key() != KEY_COMBO_BACKSLASH) {
           tap_code(KC_QUOTE);
           unregister_code(KC_LEFT_SHIFT);
           tap_code(KC_LEFT);
@@ -110,7 +108,7 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         tap_code(KC_GRAVE);
 
-        if (!MODS_SHIFT && get_last_key() != SHIFTED_SLASH) {
+        if (!is_shifted() && get_last_key() != KEY_COMBO_BACKSLASH) {
           tap_code(KC_GRAVE);
           tap_code(KC_LEFT);
         }
@@ -119,7 +117,7 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
 
     case PR_AMPIP:
       if (record->event.pressed) {
-        if (MODS_SHIFT) {
+        if (is_shifted()) {
           tap_code(KC_BACKSLASH);
 
           switch (get_last_key()) {
