@@ -135,6 +135,34 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
 
+    case MA_ARROW:
+      if (record->event.pressed) {
+        if (MODS_ANY) {
+          unshifted_tap(KC_5);
+        } else {
+          tap_code(KC_MINUS);
+          register_code(KC_LEFT_SHIFT);
+          tap_code(KC_DOT);
+          unregister_code(KC_LEFT_SHIFT);
+        }
+      }
+      return false;
+
+    case MA_SLICE:
+      if (record->event.pressed) {
+        if (MODS_ANY) {
+          unshifted_tap(KC_6);
+        } else {
+          register_code(KC_LEFT_SHIFT);
+          tap_code(KC_7);
+          unregister_code(KC_LEFT_SHIFT);
+          tap_code(KC_LEFT_BRACKET);
+          tap_code(KC_RIGHT_BRACKET);
+          tap_code(KC_LEFT);
+        }
+      }
+      return false;
+
     default:
       return true;
   }

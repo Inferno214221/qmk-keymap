@@ -31,6 +31,8 @@ enum custom_keycodes {
   PR_QUOTE,
   PR_BTICK,
   PR_AMPIP,
+  MA_ARROW,
+  MA_SLICE,
 };
 
 // Tap hold keycodes
