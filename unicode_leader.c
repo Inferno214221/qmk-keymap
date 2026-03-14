@@ -64,8 +64,8 @@ void unicode_leader_on_leader_end(void) {
     case SEQ3(KC_I, KC_N, KC_T):             register_unicode(0x222B);  break; // int   -> ∫
     case SEQ3(KC_I, KC_N, KC_F):             register_unicode(0x221E);  break; // inf   -> ∞
     case SEQ3(KC_P, KC_R, KC_O):             register_unicode(0x221D);  break; // pro   -> ∝
-    case SEQ4(KC_L, KC_E, KC_F, KC_T):       register_unicode(0x2190);  break; // left  -> ←
-    case SEQ5(KC_R, KC_I, KC_G, KC_H, KC_T): register_unicode(0x2192);  break; // right -> →
+    case SEQ1(KC_LEFT):                      register_unicode(0x2190);  break; // left  -> ←
+    case SEQ1(KC_RIGHT):                     register_unicode(0x2192);  break; // right -> →
 
     // Set Theory
     case SEQ2(KC_I, KC_N):                   register_unicode(0x2208);  break; // in    -> ∈

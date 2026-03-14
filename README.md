@@ -10,6 +10,7 @@ Features include:
 - Minor fixes to ZSA's fork (lmao).
 - Custom animations with matrix screensaver (or key-saver I guess).
 - Eager tapdance behaviour.
+- A unicode leader key ([see unicode_leader.c](./unicode_leader.c)).
 - Trial key overrides for programming, inspired by DVORAK programmer:
 
 ![Layout](./layout.png)
