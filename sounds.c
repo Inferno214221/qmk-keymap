@@ -29,7 +29,7 @@ void sounds_on_matrix_init(void) {
 }
 
 void sounds_on_layer_set_state(layer_state_t state) {
-  if (skip_sound) {
+  if (skip_sound || audio_is_playing_melody()) {
     skip_sound = false;
     return;
   }
@@ -47,14 +47,20 @@ void sounds_on_layer_set_state(layer_state_t state) {
 }
 
 void sounds_on_leader_start(void) {
-  PLAY_SONG(sfx_unicode_start);
+  if (!audio_is_playing_melody()) {
+    PLAY_SONG(sfx_unicode_start);
+  }
 }
 
 void sounds_on_leader_end(void) {
-  PLAY_SONG(sfx_unicode_end);
+  if (!audio_is_playing_melody()) {
+    PLAY_SONG(sfx_unicode_end);
+  }
 }
 
 void sounds_on_caps_word_set(bool active) {
+  if (audio_is_playing_melody()) return;
+
   if (active) {
     PLAY_SONG(sfx_caps_on);
   } else {
@@ -63,7 +69,9 @@ void sounds_on_caps_word_set(bool active) {
 }
 
 void sounds_on_alt_key_press(void) {
-  PLAY_SONG(sfx_alt_key_press);
+  if (!audio_is_playing_melody()) {
+    PLAY_SONG(sfx_alt_key_press);
+  }
 }
 
 void skip_next_sound(void) {
