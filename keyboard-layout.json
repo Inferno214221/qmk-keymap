@@ -499,7 +499,7 @@
       "t": "#db0000\n#00d93f\n#399de6\n\n\n\n\n\n\n#399de6",
       "a": 4
     },
-    "\n2\n@\n\n\n\n\n\n\n."
+    "\n2\n\n\n\n\n\n\n\n."
   ],
   [
     {
@@ -613,18 +613,27 @@
       "x": 14.5,
       "t": "#db0000\n#00d93f\n#399de6\n\n\n\n\n\n\n#399de6"
     },
-    "\n.\n%\n\n\n\n\n\n\n?"
+    "\n.\n@\n\n\n\n\n\n\n?"
   ],
   [
     {
       "y": -0.875,
       "x": 0.5,
-      "t": "#db0000",
+      "t": "#db0000\n\n\n\n\n\n\n\n\n#399de6",
       "fa": [
-        3
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        5
       ]
     },
-    "<i class='fa fa-volume-off'></i>",
+    "<i class='fa fa-volume-off'></i>\n\n\n\n\n\n\n\n\n%",
     {
       "x": 16.5,
       "t": "#db0000\n#00d93f\n\n\n\n\n\n\n\n#399de6",
