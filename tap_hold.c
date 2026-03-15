@@ -12,11 +12,11 @@ bool tap_hold_on_process_record(uint16_t keycode, keyrecord_t *record) {
           leader_start();
         } else {
           // Hold
-          register_code16(KC_LALT);
+          register_mods(KC_LALT);
         }
       } else if (!record->tap.count) {
         // Un-hold
-        unregister_code16(KC_LALT);
+        unregister_mods(KC_LALT);
       }
       return false;
   }

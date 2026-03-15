@@ -6,4 +6,8 @@ bool is_shifted(void);
 
 void restore_shift(void);
 
+bool is_alted(void);
+
+void restore_alt(void);
+
 void last_key_on_process_record(uint16_t keycode, keyrecord_t *record);

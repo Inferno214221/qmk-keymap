@@ -33,7 +33,8 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
     case PR_PAREN:
       if (record->event.pressed) {
         if (MODS_ANY) {
-          unshifted_tap(KC_9);
+          tap_code(KC_0);
+          // unshifted_tap(KC_9);
         } else {
           register_code(KC_LEFT_SHIFT);
           tap_code(KC_9);
@@ -52,7 +53,8 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
     case PR_BRACK:
       if (record->event.pressed) {
         if (MODS_ANY) {
-          unshifted_tap(KC_7);
+          unshifted_tap(KC_RIGHT_BRACKET);
+          // unshifted_tap(KC_7);
         } else {
           tap_code(KC_LEFT_BRACKET);
 
@@ -67,7 +69,8 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
     case PR_BRACE:
       if (record->event.pressed) {
         if (MODS_ANY) {
-          unshifted_tap(KC_1);
+          tap_code(KC_RIGHT_BRACKET);
+          // unshifted_tap(KC_1);
         } else {
           register_code(KC_LEFT_SHIFT);
           tap_code(KC_LEFT_BRACKET);
@@ -86,7 +89,8 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
     case PR_ANGLE:
       if (record->event.pressed) {
         if (MODS_ANY) {
-          unshifted_tap(KC_3);
+          tap_code(KC_DOT);
+          // unshifted_tap(KC_3);
         } else {
           switch (get_last_key()) {
             case KC_A ... KC_Z:
@@ -106,16 +110,28 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
 
     case PR_QUOTE:
       if (record->event.pressed) {
-        tap_code(KC_QUOTE);
+        if (is_alted()) {
+          unregister_code(KC_LEFT_ALT);
+          tap_code(KC_GRAVE);
 
-        if (is_shifted() && NOT_PRECEDING_BACKSLASH) {
+          if (NOT_PRECEDING_BACKSLASH) {
+            tap_code(KC_GRAVE);
+            tap_code(KC_LEFT);
+          }
+          restore_alt();
+        } else {
           tap_code(KC_QUOTE);
-          unregister_code(KC_LEFT_SHIFT);
-          tap_code(KC_LEFT);
-          register_code(KC_LEFT_SHIFT);
+
+          if (is_shifted() && NOT_PRECEDING_BACKSLASH) {
+            tap_code(KC_QUOTE);
+            unregister_code(KC_LEFT_SHIFT);
+            tap_code(KC_LEFT);
+            register_code(KC_LEFT_SHIFT);
+          }
         }
       }
       return false;
+
     case PR_BTICK:
       if (record->event.pressed) {
         tap_code(KC_GRAVE);

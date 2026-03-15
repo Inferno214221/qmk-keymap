@@ -3,12 +3,10 @@
     {
       "x": 3.5,
       "c": "#543f24",
-      "t": "#ff0000\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
+      "t": "#ff0000\n\n\n\n\n\n\n\n\n#ffffff",
       "f": 5,
       "fa": [
-        3,
-        0,
-        0
+        3
       ]
     },
     "F3\n\n\n\n\n\n\n\n\n3",
@@ -66,7 +64,7 @@
     "Esc",
     {
       "x": 5,
-      "t": "#ff0000\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
+      "t": "#ff0000\n\n\n\n\n\n\n\n\n#ffffff",
       "a": 4
     },
     "F6\n\n\n\n\n\n\n\n\n<i class='fa fa-calculator'></i>",
@@ -92,12 +90,11 @@
     "E",
     {
       "x": 10.5,
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
+      "t": "#ffffff\n#05ff00",
       "a": 4,
       "fa": [
         3,
-        4,
-        0
+        4
       ]
     },
     "\n7\n\n\n\n\n\n\n\nI"
@@ -113,21 +110,19 @@
     "W",
     {
       "x": 1,
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
+      "f": 5
+    },
+    "R",
+    {
+      "x": 8.5,
+      "f": 5
+    },
+    "U",
+    {
+      "x": 1,
+      "t": "#ffffff\n#05ff00",
       "a": 4,
-      "fa": [
-        3,
-        0,
-        0
-      ]
-    },
-    "\n}\n\n\n\n\n\n\n\nR",
-    {
-      "x": 8.5
-    },
-    "\n)\n\n\n\n\n\n\n\nU",
-    {
-      "x": 1
+      "f": 5
     },
     "\n8\n\n\n\n\n\n\n\nO"
   ],
@@ -142,16 +137,19 @@
     "Q",
     {
       "x": 3,
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
-      "a": 4
+      "f": 5
     },
-    "\n>\n\n\n\n\n\n\n\nT",
+    "T",
     {
-      "x": 6.5
+      "x": 6.5,
+      "f": 5
     },
-    "\n]\n\n\n\n\n\n\n\nY",
+    "Y",
     {
-      "x": 3
+      "x": 3,
+      "t": "#ffffff\n#05ff00",
+      "a": 4,
+      "f": 5
     },
     "\n9\n\n\n\n\n\n\n\nP"
   ],
@@ -159,32 +157,39 @@
     {
       "y": -0.875,
       "x": 0.5,
+      "c": "#5e2323",
+      "t": "#ffffff",
+      "a": 7,
       "fa": [
-        3,
+        6
+      ]
+    },
+    "↹",
+    {
+      "x": 5,
+      "c": "#45274d",
+      "fa": [
+        7
+      ]
+    },
+    "⇤",
+    {
+      "x": 4.5
+    },
+    "⇥",
+    {
+      "x": 5,
+      "c": "#253747",
+      "t": "#ffffff\n#05ff00\n\n#0094ff",
+      "a": 4,
+      "fa": [
+        7,
+        0,
         0,
         4
       ]
     },
-    "\n\n%\n\n\n\n\n\n\n$",
-    {
-      "x": 5,
-      "c": "#45274d",
-      "t": "#ffffff",
-      "a": 7
-    },
-    "",
-    {
-      "x": 4.5,
-      "f": 5
-    },
-    "<i class='fa fa-paste'></i>",
-    {
-      "x": 5,
-      "c": "#253747",
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
-      "a": 4
-    },
-    "\n*\n#\n\n\n\n\n\n\n*"
+    "\n*\n#\n%\n\n\n\n\n\n*"
   ],
   [
     {
@@ -197,7 +202,7 @@
     "D",
     {
       "x": 10.5,
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
+      "t": "#ffffff\n#05ff00",
       "a": 4
     },
     "\n4\n\n\n\n\n\n\n\nK"
@@ -213,18 +218,20 @@
     "S",
     {
       "x": 1,
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
-      "a": 4,
+      "f": 5,
       "n": true
     },
-    "\n{\n\n\n\n\n\n\n\nF",
+    "F",
     {
       "x": 8.5,
+      "f": 5,
       "n": true
     },
-    "\n(\n\n\n\n\n\n\n\nJ",
+    "J",
     {
-      "x": 1
+      "x": 1,
+      "t": "#ffffff\n#05ff00",
+      "a": 4
     },
     "\n5\n\n\n\n\n\n\n\nL"
   ],
@@ -239,54 +246,59 @@
     "A",
     {
       "x": 3,
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
+      "f": 5
+    },
+    "G",
+    {
+      "x": 6.5,
+      "f": 5
+    },
+    "H",
+    {
+      "x": 3,
+      "t": "#ffffff\n#05ff00",
       "a": 4
-    },
-    "\n<\n\n\n\n\n\n\n\nG",
-    {
-      "x": 6.5
-    },
-    "\n[\n\n\n\n\n\n\n\nH",
-    {
-      "x": 3
     },
     "\n6\n:\n\n\n\n\n\n\n;"
   ],
   [
     {
       "y": -0.875,
-      "x": 0.5
+      "x": 0.5,
+      "t": "#ffffff\n#05ff00\n\n#0094ff"
     },
-    "\n\n@\n\n\n\n\n\n\n^",
+    "\n\n^\n~\n\n\n\n\n\n$",
     {
       "x": 5,
       "c": "#45274d",
-      "t": "#05ff00",
-      "a": 7
+      "t": "#ffffff",
+      "a": 7,
+      "fa": [
+        9
+      ]
     },
-    "Num",
+    "<i class='fa fa-linux'></i>",
     {
       "x": 4.5,
-      "t": "#ffffff\n\n\n\n\n\n#ffffff",
-      "a": 5,
+      "t": "#05ff00",
       "fa": [
-        3,
         3
       ]
     },
-    "\n<i class='fa fa-cut'></i>\n\n\n\n\n<i class='fa fa-copy'></i>",
+    "Num",
     {
       "x": 5,
       "c": "#253747",
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
+      "t": "#ffffff\n#05ff00\n\n#0094ff",
       "a": 4,
       "fa": [
         3,
         4,
+        4,
         4
       ]
     },
-    "\n/\n\"\n\n\n\n\n\n\n'"
+    "\n/\n\"\n`\n\n\n\n\n\n'"
   ],
   [
     {
@@ -299,7 +311,7 @@
     "C",
     {
       "x": 10.5,
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
+      "t": "#ffffff\n#05ff00",
       "a": 4,
       "fa": [
         3,
@@ -330,8 +342,9 @@
     "M",
     {
       "x": 1,
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
-      "a": 4
+      "t": "#ffffff\n#05ff00",
+      "a": 4,
+      "f": 5
     },
     "\n2\n!\n\n\n\n\n\n\n."
   ],
@@ -356,19 +369,29 @@
     "N",
     {
       "x": 3,
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
-      "a": 4
+      "t": "#ffffff\n#05ff00",
+      "a": 4,
+      "f": 5
     },
     "\n3\n\\\n\n\n\n\n\n\n/"
   ],
   [
     {
       "y": -0.875,
-      "x": 0.5
+      "x": 0.5,
+      "t": "#ffffff\n#05ff00\n\n#0094ff",
+      "fa": [
+        3,
+        4,
+        0,
+        4
+      ]
     },
-    "\n\n~\n\n\n\n\n\n\n`",
+    "\n-\n_\n@\n\n\n\n\n\n-",
     {
-      "x": 16.5
+      "x": 16.5,
+      "t": "#ffffff\n#05ff00",
+      "f": 5
     },
     "\n^\n|\n\n\n\n\n\n\n&"
   ],
@@ -394,22 +417,15 @@
       "y": -0.875,
       "x": 2.5,
       "c": "#253747",
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
+      "t": "#ffffff\n#05ff00",
       "a": 4,
       "fa": [
         7,
-        4,
-        4,
         0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        7
+        4
       ]
     },
-    "\n+\n+\n\n\n\n\n\n\n=",
+    "\n\n>\n\n\n\n\n\n\n< >",
     {
       "x": 1,
       "c": "#5e2323",
@@ -423,26 +439,32 @@
     "⬅",
     {
       "x": 1,
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
-      "a": 4
-    },
-    "\n0\n\n\n\n\n\n\n\n⇤"
-  ],
-  [
-    {
-      "y": -0.875,
-      "x": 1.5,
       "c": "#253747",
+      "t": "#ffffff\n#05ff00",
+      "a": 4,
       "fa": [
         7,
         4,
         4
       ]
     },
-    "\n-\n_\n\n\n\n\n\n\n-",
+    "\n0\n]\n\n\n\n\n\n\n[ ]"
+  ],
+  [
     {
-      "x": 14.5,
-      "c": "#5e2323",
+      "y": -0.875,
+      "x": 1.5
+    },
+    "\n\n}\n\n\n\n\n\n\n{ }",
+    {
+      "x": 14.5
+    },
+    "\n.\n)\n\n\n\n\n\n\n( )"
+  ],
+  [
+    {
+      "y": -0.875,
+      "x": 0.5,
       "fa": [
         7,
         4,
@@ -453,30 +475,16 @@
         0,
         0,
         0,
-        7
-      ]
-    },
-    "\n.\n\n\n\n\n\n\n\n⇥"
-  ],
-  [
-    {
-      "y": -0.875,
-      "x": 0.5,
-      "t": "#ffffff",
-      "a": 7,
-      "fa": [
         6
       ]
     },
-    "↹",
+    "\n+\n+\n\n\n\n\n\n\n=",
     {
       "x": 16.5,
-      "t": "#ffffff\n#05ff00\n\n\n\n\n\n\n\n#ffffff",
-      "a": 4,
+      "c": "#5e2323",
       "fa": [
-        6,
-        4,
-        0
+        7,
+        4
       ]
     },
     "\n⏎\n\n\n\n\n\n\n\n⌦"
@@ -488,17 +496,12 @@
       "ry": 5.75,
       "x": -3,
       "c": "#0077ba",
-      "t": "#ffffff\n\n\n\n\n\n#ffffff",
+      "t": "#ffffff",
       "a": 5,
       "f": 4,
       "fa": [
-        6,
-        2,
-        0,
-        0,
-        0,
-        0,
-        0
+        7,
+        2
       ],
       "w": 2
     },
@@ -510,7 +513,7 @@
       "c": "#204f31",
       "f": 5,
       "fa": [
-        6,
+        7,
         1,
         0,
         0,
@@ -522,7 +525,6 @@
     },
     "\nCaps Wd\n\n\n\n\n⇧",
     {
-      "t": "#ffffff",
       "a": 7,
       "h": 1.5
     },
@@ -543,25 +545,28 @@
       "c": "#0077ba",
       "f": 4,
       "fa": [
-        9
+        5
       ],
       "w": 2
     },
-    "<i class='fa fa-linux'></i>"
+    "<i class='fa fa-paste'></i>"
   ],
   [
     {
       "c": "#204f31",
-      "t": "#05ff00",
+      "t": "#05ff00\n#ffffff\n\n\n\n\n#ffffff",
+      "a": 5,
       "f": 5,
+      "f2": 4,
+      "h": 1.5
+    },
+    "\n<i class='fa fa-cut'></i>\n\n\n\n\n<i class='fa fa-copy'></i>",
+    {
+      "t": "#ffffff",
+      "a": 7,
       "fa": [
         3
       ],
-      "h": 1.5
-    },
-    "Sym",
-    {
-      "t": "#ffffff",
       "h": 1.5
     },
     "Space",

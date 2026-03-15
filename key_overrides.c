@@ -1,3 +1,5 @@
+#include "keycodes.h"
+#include "keymap_us.h"
 #include QMK_KEYBOARD_H
 
 #include "layers.h"
@@ -25,8 +27,12 @@ KEY_OVERRIDE_SHIFT(o_dot_dot,   KC_DOT,  KC_EXLM);
 KEY_OVERRIDE_SHIFT(o_slsh_bsls, KC_SLSH, KC_BSLS);
 KEY_OVERRIDE_SHIFT(o_exlm_circ, KC_ASTR, KC_HASH);
 KEY_OVERRIDE_SHIFT(o_ampr_pipe, KC_AMPR, KC_PIPE);
-KEY_OVERRIDE_SHIFT(o_ques_perc, KC_CIRC, KC_AT);
-KEY_OVERRIDE_SHIFT(o_hash_dlr,  KC_DLR,  KC_PERC);
+// KEY_OVERRIDE_SHIFT(o_ques_perc, KC_CIRC, KC_AT);
+KEY_OVERRIDE_SHIFT(o_hash_dlr,  KC_DLR,  KC_CIRC);
+
+const key_override_t o_ques_perc = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_MINS, KC_AT, 1 << L_DEF, ~MOD_MASK_ALT);
+const key_override_t o_dlr_tild = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_DLR, KC_TILD, 1 << L_DEF, ~MOD_MASK_ALT);
+const key_override_t o_astr_perc = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_ASTR, KC_PERC, 1 << L_DEF, ~MOD_MASK_ALT);
 
 const key_override_t *key_overrides[] = {
   // &o_lcbr_1_none,
@@ -57,4 +63,6 @@ const key_override_t *key_overrides[] = {
   &o_exlm_circ,
   &o_ampr_pipe,
   &o_ques_perc,
+  &o_dlr_tild,
+  &o_astr_perc,
 };
