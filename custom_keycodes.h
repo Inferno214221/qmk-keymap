@@ -24,13 +24,13 @@ enum custom_keycodes {
   INF_NULL,
 
   // Paired keys
-  PR_PAREN,
-  PR_BRACK,
-  PR_BRACE,
-  PR_ANGLE,
-  PR_QUOTE,
-  PR_BTICK,
-  PR_AMPIP,
+  // PR_PAREN,
+  // PR_BRACK,
+  // PR_BRACE,
+  // PR_ANGLE,
+  // PR_QUOTE,
+  // PR_BTICK,
+  // PR_AMPIP,
   MA_ARROW,
   MA_SLICE,
 };
