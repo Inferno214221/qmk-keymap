@@ -116,6 +116,7 @@ bool smart_brackets_on_process_record(uint16_t keycode, keyrecord_t *record) {
         }
       }
       return false;
+      
     case PR_BTICK:
       if (record->event.pressed) {
         tap_code(KC_GRAVE);
