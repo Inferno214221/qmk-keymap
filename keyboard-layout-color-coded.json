@@ -2,8 +2,8 @@
   [
     {
       "x": 3.5,
-      "c": "#292929",
-      "t": "#db0000\n\n#399de6\n\n\n\n\n\n\n#9e00ff",
+      "c": "#5e2323",
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffdd00",
       "f": 4,
       "fa": [
         3,
@@ -21,7 +21,7 @@
     "F3\n\n3\n\n\n\n\n\n\n< >",
     {
       "x": 10.5,
-      "t": "#db0000\n#00d93f\n#399de6\n\n\n\n\n\n\n#399de6",
+      "t": "#db0000\n#00d93f\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "fa": [
         3,
         3,
@@ -41,7 +41,7 @@
     {
       "y": -0.875,
       "x": 2.5,
-      "t": "#db0000\n\n#399de6\n\n\n\n\n\n\n#399de6"
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffffff"
     },
     "F2\n\n2\n\n\n\n\n\n\n}",
     {
@@ -50,7 +50,7 @@
     "F4\n\n4\n\n\n\n\n\n\n>",
     {
       "x": 8.5,
-      "t": "#db0000\n\n#399de6\n\n\n\n\n\n\n#9e00ff"
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffdd00"
     },
     "F9\n\n7\n\n\n\n\n\n\n[ ]",
     {
@@ -66,7 +66,7 @@
     "F1\n\n1\n\n\n\n\n\n\n{ }",
     {
       "x": 3,
-      "t": "#db0000\n\n#399de6\n\n\n\n\n\n\n#399de6"
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffffff"
     },
     "F5\n\n5\n\n\n\n\n\n\n->",
     {
@@ -82,6 +82,7 @@
     {
       "y": -0.875,
       "x": 0.5,
+      "c": "#292929",
       "t": "#399de6",
       "a": 7
     },
@@ -118,7 +119,8 @@
     {
       "y": -0.375,
       "x": 3.5,
-      "t": "#db0000\n\n\n\n\n\n\n\n\n#399de6",
+      "c": "#253747",
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "fa": [
         0,
         3,
@@ -135,7 +137,7 @@
     "<i class='fa fa-volume-up'></i>\n\n\n\n\n\n\n\n\nE",
     {
       "x": 10.5,
-      "t": "#db0000\n#00d93f\n\n\n\n\n\n\n\n#399de6"
+      "t": "#db0000\n#00d93f\n#ffffff\n\n\n\n\n\n\n#ffffff"
     },
     "\n7\n\n\n\n\n\n\n\nI"
   ],
@@ -143,7 +145,7 @@
     {
       "y": -0.875,
       "x": 2.5,
-      "t": "#db0000\n\n\n\n\n\n\n\n\n#399de6",
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "fa": [
         3,
         3,
@@ -160,7 +162,7 @@
     "⏯\n\n\n\n\n\n\n\n\nW",
     {
       "x": 1,
-      "t": "#399de6",
+      "t": "#ffffff",
       "a": 7,
       "fa": [
         5
@@ -173,7 +175,7 @@
     "U",
     {
       "x": 1,
-      "t": "#db0000\n#00d93f\n\n\n\n\n\n\n\n#399de6",
+      "t": "#db0000\n#00d93f\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "a": 4,
       "fa": [
         3,
@@ -194,7 +196,7 @@
     {
       "y": -0.875,
       "x": 1.5,
-      "t": "#db0000\n\n\n\n\n\n\n\n\n#399de6",
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "fa": [
         0,
         0,
@@ -211,7 +213,7 @@
     "<i class='fa fa-volume-down'></i>\n\n\n\n\n\n\n\n\nQ",
     {
       "x": 3,
-      "t": "#399de6",
+      "t": "#ffffff",
       "a": 7,
       "fa": [
         5
@@ -224,7 +226,7 @@
     "Y",
     {
       "x": 3,
-      "t": "#db0000\n#00d93f\n\n\n\n\n\n\n\n#399de6",
+      "t": "#db0000\n#00d93f\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "a": 4,
       "fa": [
         5,
@@ -245,6 +247,7 @@
     {
       "y": -0.875,
       "x": 0.5,
+      "c": "#292929",
       "t": "#399de6",
       "a": 7,
       "fa": [
@@ -265,7 +268,8 @@
     "⇥",
     {
       "x": 5,
-      "t": "#db0000\n#00d93f\n#399de6\n\n\n\n\n\n\n#399de6",
+      "c": "#204f31",
+      "t": "#db0000\n#00d93f\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "a": 4,
       "fa": [
         7,
@@ -286,7 +290,8 @@
     {
       "y": -0.375,
       "x": 3.5,
-      "t": "#db0000\n\n\n\n\n\n\n\n\n#399de6",
+      "c": "#253747",
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "fa": [
         3,
         3,
@@ -303,7 +308,7 @@
     "⏭\n\n\n\n\n\n\n\n\nD",
     {
       "x": 10.5,
-      "t": "#db0000\n#00d93f\n\n\n\n\n\n\n\n#399de6"
+      "t": "#db0000\n#00d93f\n#ffffff\n\n\n\n\n\n\n#ffffff"
     },
     "⏮\n4\n\n\n\n\n\n\n\nK"
   ],
@@ -311,12 +316,12 @@
     {
       "y": -0.875,
       "x": 2.5,
-      "t": "#db0000\n\n\n\n\n\n\n\n\n#399de6"
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffffff"
     },
     "⏹\n\n\n\n\n\n\n\n\nS",
     {
       "x": 1,
-      "t": "#399de6",
+      "t": "#ffffff",
       "a": 7,
       "fa": [
         5
@@ -331,7 +336,7 @@
     "J",
     {
       "x": 1,
-      "t": "#db0000\n#00d93f\n\n\n\n\n\n\n\n#399de6",
+      "t": "#db0000\n#00d93f\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "a": 4,
       "fa": [
         3,
@@ -352,12 +357,12 @@
     {
       "y": -0.875,
       "x": 1.5,
-      "t": "#db0000\n\n\n\n\n\n\n\n\n#399de6"
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffffff"
     },
     "⏮\n\n\n\n\n\n\n\n\nA",
     {
       "x": 3,
-      "t": "#399de6",
+      "t": "#ffffff",
       "a": 7,
       "fa": [
         5
@@ -370,7 +375,8 @@
     "H",
     {
       "x": 3,
-      "t": "#db0000\n#00d93f\n#399de6\n\n\n\n\n\n\n#399de6",
+      "c": "#204f31",
+      "t": "#db0000\n#00d93f\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "a": 4,
       "fa": [
         3,
@@ -391,6 +397,7 @@
     {
       "y": -0.875,
       "x": 0.5,
+      "c": "#292929",
       "t": "#399de6",
       "a": 7,
       "fa": [
@@ -422,7 +429,8 @@
     "<i class='fa fa-gamepad'></i>\n\n\n\n\n\n\n\n\nNum",
     {
       "x": 5,
-      "t": "#db0000\n#00d93f\n#9e00ff\n\n\n\n\n\n\n#399de6",
+      "c": "#204f31",
+      "t": "#db0000\n#00d93f\n#ffdd00\n\n\n\n\n\n\n#ffffff",
       "fa": [
         3,
         3,
@@ -442,7 +450,8 @@
     {
       "y": -0.375,
       "x": 3.5,
-      "t": "#399de6",
+      "c": "#253747",
+      "t": "#ffffff",
       "a": 7,
       "fa": [
         5
@@ -451,7 +460,8 @@
     "C",
     {
       "x": 10.5,
-      "t": "#db0000\n#00d93f\n#399de6\n\n\n\n\n\n\n#399de6",
+      "c": "#204f31",
+      "t": "#db0000\n#00d93f\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "a": 4,
       "fa": [
         5,
@@ -472,7 +482,8 @@
     {
       "y": -0.875,
       "x": 2.5,
-      "t": "#399de6",
+      "c": "#253747",
+      "t": "#ffffff",
       "a": 7
     },
     "X",
@@ -486,7 +497,8 @@
     "M",
     {
       "x": 1,
-      "t": "#db0000\n#00d93f\n\n\n\n\n\n\n\n#399de6",
+      "c": "#204f31",
+      "t": "#db0000\n#00d93f\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "a": 4
     },
     "\n2\n\n\n\n\n\n\n\n."
@@ -495,7 +507,8 @@
     {
       "y": -0.875,
       "x": 1.5,
-      "t": "#399de6",
+      "c": "#253747",
+      "t": "#ffffff",
       "a": 7
     },
     "Z",
@@ -509,7 +522,8 @@
     "N",
     {
       "x": 3,
-      "t": "#db0000\n#00d93f\n#399de6\n\n\n\n\n\n\n#399de6",
+      "c": "#204f31",
+      "t": "#db0000\n#00d93f\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "a": 4
     },
     "\n3\n\\\n\n\n\n\n\n\n/"
@@ -518,12 +532,12 @@
     {
       "y": -0.875,
       "x": 0.5,
-      "t": "#db0000\n\n#399de6\n\n\n\n\n\n\n#9e00ff"
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffdd00"
     },
     "\n\n~\n\n\n\n\n\n\n` `",
     {
       "x": 16.5,
-      "t": "#db0000\n#00d93f\n#9e00ff\n\n\n\n\n\n\n#399de6"
+      "t": "#db0000\n#00d93f\n#ffdd00\n\n\n\n\n\n\n#ffffff"
     },
     "\n+\n|\n\n\n\n\n\n\n&"
   ],
@@ -531,6 +545,7 @@
     {
       "y": -0.375,
       "x": 3.5,
+      "c": "#292929",
       "t": "#399de6",
       "a": 7,
       "fa": [
@@ -547,7 +562,8 @@
     {
       "y": -0.875,
       "x": 2.5,
-      "t": "#db0000\n\n#399de6\n\n\n\n\n\n\n#399de6",
+      "c": "#204f31",
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "a": 4,
       "fa": [
         7,
@@ -565,6 +581,7 @@
     "\n\n+\n\n\n\n\n\n\n=",
     {
       "x": 1,
+      "c": "#292929",
       "t": "#399de6",
       "a": 7
     },
@@ -575,7 +592,8 @@
     "⬅",
     {
       "x": 1,
-      "t": "#db0000\n#00d93f\n#399de6\n\n\n\n\n\n\n#399de6",
+      "c": "#204f31",
+      "t": "#db0000\n#00d93f\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "a": 4,
       "fa": [
         7,
@@ -596,12 +614,12 @@
     {
       "y": -0.875,
       "x": 1.5,
-      "t": "#db0000\n\n#399de6\n\n\n\n\n\n\n#399de6"
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffffff"
     },
     "\n\n_\n\n\n\n\n\n\n-",
     {
       "x": 14.5,
-      "t": "#db0000\n#00d93f\n#399de6\n\n\n\n\n\n\n#399de6"
+      "t": "#db0000\n#00d93f\n#ffffff\n\n\n\n\n\n\n#ffffff"
     },
     "\n.\n^\n\n\n\n\n\n\n!"
   ],
@@ -609,7 +627,7 @@
     {
       "y": -0.875,
       "x": 0.5,
-      "t": "#db0000\n\n\n\n\n\n\n\n\n#399de6",
+      "t": "#db0000\n\n#ffffff\n\n\n\n\n\n\n#ffffff",
       "fa": [
         3,
         3,
@@ -626,6 +644,7 @@
     "<i class='fa fa-volume-off'></i>\n\n\n\n\n\n\n\n\n%",
     {
       "x": 16.5,
+      "c": "#292929",
       "t": "#db0000\n#00d93f\n\n\n\n\n\n\n\n#399de6",
       "fa": [
         2,
