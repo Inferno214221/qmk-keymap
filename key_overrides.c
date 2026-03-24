@@ -20,13 +20,13 @@ KEY_OVERRIDE_SHIFT_OR_COMBO(o_rprn_0_none, o_rprn_0_shift, KC_0, KC_RPRN);
 #define KEY_OVERRIDE_SHIFT(NAME, FROM, TO) \
 const key_override_t NAME = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, FROM, TO, 1 << L_DEF, ~MOD_MASK_SHIFT);
 
-KEY_OVERRIDE_SHIFT(o_comm_astr, KC_COMM, KC_ASTR);
+KEY_OVERRIDE_SHIFT(o_comm_astr, KC_COMM, KC_DLR);
 KEY_OVERRIDE_SHIFT(o_dot_dot,   KC_DOT,  KC_DOT);
 KEY_OVERRIDE_SHIFT(o_slsh_bsls, KC_SLSH, KC_BSLS);
 KEY_OVERRIDE_SHIFT(o_exlm_circ, KC_EXLM, KC_CIRC);
 KEY_OVERRIDE_SHIFT(o_ampr_pipe, KC_AMPR, KC_PIPE);
 KEY_OVERRIDE_SHIFT(o_ques_perc, KC_QUES, KC_AT);
-KEY_OVERRIDE_SHIFT(o_hash_dlr,  KC_HASH, KC_DLR);
+KEY_OVERRIDE_SHIFT(o_hash_dlr,  KC_ASTR, KC_HASH);
 
 const key_override_t *key_overrides[] = {
   &o_lcbr_1_none,
