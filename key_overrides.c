@@ -17,8 +17,10 @@ KEY_OVERRIDE_SHIFT_OR_COMBO(o_rbrc_8_none, o_rbrc_8_shift, KC_8, KC_RBRC);
 KEY_OVERRIDE_SHIFT_OR_COMBO(o_lprn_9_none, o_lprn_9_shift, KC_9, KC_LPRN);
 KEY_OVERRIDE_SHIFT_OR_COMBO(o_rprn_0_none, o_rprn_0_shift, KC_0, KC_RPRN);
 
+// No negmods means that ctrl+shift combos will always produce unique inputs, regardless off what
+// that combo is actually read as.
 #define KEY_OVERRIDE_SHIFT(NAME, FROM, TO) \
-const key_override_t NAME = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, FROM, TO, 1 << L_DEF, ~MOD_MASK_SHIFT);
+const key_override_t NAME = ko_make_with_layers(MOD_MASK_SHIFT, FROM, TO, 1 << L_DEF);
 
 KEY_OVERRIDE_SHIFT(o_comm_astr, KC_COMM, KC_DLR);
 KEY_OVERRIDE_SHIFT(o_dot_dot,   KC_DOT,  KC_DOT);
