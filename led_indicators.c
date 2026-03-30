@@ -4,6 +4,8 @@
 
 #include "one_handed.h"
 
+#include "audio.h"
+
 void led_indicators_on_layer_set_state(layer_state_t state) {
   STATUS_LED_1(is_caps_word_on());
   STATUS_LED_2(leader_sequence_active());

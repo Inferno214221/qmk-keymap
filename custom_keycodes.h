@@ -13,15 +13,17 @@ enum custom_keycodes {
   KM_PREV,
 
   // Tetris keycodes
-  TET_LEFT,
-  TET_RGHT,
-  TET_DOWN,
-  TET_ROT,
-  TET_RES,
-  TET_PAUS,
+  TE_LEFT,
+  TE_RGHT,
+  TE_DOWN,
+  TE_ROT,
+  TE_RES,
+  TE_PAUS,
 
   // No-op key that maintains lighting (!= KC_NO)
-  INF_NULL,
+  INF_NUL,
+  // No-op key that indicates the current layer
+  INF_IND,
 
   // Paired keys
   // PR_PAREN,

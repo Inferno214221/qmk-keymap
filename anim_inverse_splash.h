@@ -6,8 +6,11 @@ RGB_MATRIX_EFFECT(INVERSE_MULTISPLASH)
 
 #include <string.h>
 
+#include "custom_keycodes.h"
 #include "layers.h"
+
 #include "keymap_common.h"
+#include "audio.h"
 
 //                h   v   dh  dv
 #define C_BLUE  {135,255,  8,-40}
@@ -90,25 +93,35 @@ bool INVERSE_MULTISPLASH(effect_params_t* params) {
     }
   };
 
-  // Check for primary == secondary and if so, revert to i iteration and avoid keymap reads.
-  if (
-    memcmp(&hsvs[0], &hsvs[1], sizeof(struct hsv_t)) == 0
-    && memcmp(&deltas[0], &deltas[1], sizeof(struct hsv_delta_t)) == 0
-  ) {
-    for (uint8_t i = led_min; i < led_max; i++) {
-      apply_inverse_splash(i, count, hsvs[0], deltas[0]);
-    }
-  } else {
     for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
-      for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
-        uint8_t i = g_led_config.matrix_co[row][col];
+        for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
+            uint8_t i = g_led_config.matrix_co[row][col];
 
-        bool use_secondary = keymap_key_to_keycode(highest, (keypos_t){col,row}) == KC_NO;
-        
-        apply_inverse_splash(i, count, hsvs[use_secondary], deltas[use_secondary]);
-      }
+            switch (keymap_key_to_keycode(highest, (keypos_t){col,row})) {
+                case INF_IND:
+                    rgb_t rgb;
+
+                    if (is_caps_word_on()) {
+                        rgb = rgb_matrix_hsv_to_rgb((hsv_t) { .h = 160, .s = 255, .v = rgb_matrix_config.hsv.v });
+                    } else if (leader_sequence_active()) {
+                        rgb = rgb_matrix_hsv_to_rgb((hsv_t) { .h =  85, .s = 255, .v = rgb_matrix_config.hsv.v });
+                    } else if (!audio_is_on()) {
+                        rgb = rgb_matrix_hsv_to_rgb((hsv_t) { .h =   0, .s = 255, .v = rgb_matrix_config.hsv.v });
+                    } else {
+                        rgb = (rgb_t) { .r = 0, .g = 0, .b = 0 };
+                    }
+
+                    rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
+                    // Don't write anything at all, leave these keys for indicators.
+                    break;
+                case KC_NO:
+                    apply_inverse_splash(i, count, hsvs[true], deltas[true]);
+                    break;
+                default:
+                    apply_inverse_splash(i, count, hsvs[false], deltas[false]);
+            }
+        }
     }
-  }
   return rgb_matrix_check_finished_leds(led_max);
 }
 

@@ -13,19 +13,19 @@ void begin_tetris(void) {
 bool tetris_on_process_record(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     // Tetris Keycodes
-    case TET_RES:
+    case TE_RES:
       if (record->event.pressed) begin_tetris();
       return false;
-    case TET_LEFT:
+    case TE_LEFT:
       if (record->event.pressed) tetris_register_move(MOVE_LEFT);
       return false;
-    case TET_ROT:
+    case TE_ROT:
       if (record->event.pressed) tetris_register_move(MOVE_ROTATE);
       return false;
-    case TET_RGHT:
+    case TE_RGHT:
       if (record->event.pressed) tetris_register_move(MOVE_RIGHT);
       return false;
-    case TET_PAUS:
+    case TE_PAUS:
       if (record->event.pressed) tetris_pause();
       return false;
   }
