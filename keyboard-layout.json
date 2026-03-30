@@ -56,7 +56,7 @@
     {
       "x": 6.5
     },
-    "F8\n\n6\n\n\n\n\n\n\n&[ ]",
+    "F8\n\n6\n\n\n\n\n\n\n%",
     {
       "x": 3
     },
@@ -266,7 +266,7 @@
         5
       ]
     },
-    "\n*\n$\n\n\n\n\n\n\n#"
+    "\n*\n*\n\n\n\n\n\n\n#"
   ],
   [
     {
@@ -452,7 +452,7 @@
         5
       ]
     },
-    "\n1\n*\n\n\n\n\n\n\n,"
+    "\n1\n$\n\n\n\n\n\n\n,"
   ],
   [
     {
@@ -595,7 +595,7 @@
         5
       ]
     },
-    "<i class='fa fa-volume-off'></i>\n\n\n\n\n\n\n\n\n%",
+    "<i class='fa fa-volume-off'></i>",
     {
       "x": 16.5,
       "t": "#db0000\n#00d93f\n\n\n\n\n\n\n\n#399de6",
