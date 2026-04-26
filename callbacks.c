@@ -19,12 +19,15 @@ void keyboard_post_init_user(void) {
 }
 
 void matrix_init_user(void) {
+  g_led_config.flags[35] = LED_FLAG_UNDERGLOW;
+  g_led_config.flags[71] = LED_FLAG_UNDERGLOW;
+  g_led_config.flags[31] = LED_FLAG_INDICATOR;
   sounds_on_matrix_init();
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   inactivity_on_proccess_record();
-  
+
   bool res = tap_hold_on_process_record(keycode, record)
     && smart_brackets_on_process_record(keycode, record)
     && music_on_process_record(keycode, record)
@@ -38,7 +41,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 layer_state_t layer_state_set_user(layer_state_t state) {
   sounds_on_layer_set_state(state);
   led_indicators_on_layer_set_state(state);
-  
+
   switch (get_highest_layer(state)) {
     case L_TET:
       tetris_on_layer_set_tetris();

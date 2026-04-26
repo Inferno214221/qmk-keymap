@@ -97,23 +97,15 @@ bool INVERSE_MULTISPLASH(effect_params_t* params) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t i = g_led_config.matrix_co[row][col];
 
+            if (HAS_FLAGS(g_led_config.flags[i], LED_FLAG_INDICATOR)) {
+                continue;
+            }
+            if (HAS_FLAGS(g_led_config.flags[i], LED_FLAG_UNDERGLOW)) {
+                rgb_matrix_set_color(i, 0, 0, 0);
+                continue;
+            }
+
             switch (keymap_key_to_keycode(highest, (keypos_t){col,row})) {
-                case INF_IND:
-                    rgb_t rgb;
-
-                    if (is_caps_word_on()) {
-                        rgb = rgb_matrix_hsv_to_rgb((hsv_t) { .h = 160, .s = 255, .v = rgb_matrix_config.hsv.v });
-                    } else if (leader_sequence_active()) {
-                        rgb = rgb_matrix_hsv_to_rgb((hsv_t) { .h =  85, .s = 255, .v = rgb_matrix_config.hsv.v });
-                    } else if (!audio_is_on()) {
-                        rgb = rgb_matrix_hsv_to_rgb((hsv_t) { .h =   0, .s = 255, .v = rgb_matrix_config.hsv.v });
-                    } else {
-                        rgb = (rgb_t) { .r = 0, .g = 0, .b = 0 };
-                    }
-
-                    rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
-                    // Don't write anything at all, leave these keys for indicators.
-                    break;
                 case KC_NO:
                     apply_inverse_splash(i, count, hsvs[true], deltas[true]);
                     break;

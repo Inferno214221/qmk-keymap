@@ -22,8 +22,6 @@ enum custom_keycodes {
 
   // No-op key that maintains lighting (!= KC_NO)
   INF_NUL,
-  // No-op key that indicates the current layer
-  INF_IND,
 
   // Paired keys
   // PR_PAREN,
