@@ -1,6 +1,6 @@
 # My fork of ZSA's fork of QMK Firmware
 
-The main branch, firmware25 contains my current config for my Moonlander.
+My current Moonlander Mk1 config. This repo functions as a submodule to my own fork of qmk-firmware, which has very few changes itself ([inferno214221/qmk-firmware](https://github.com/inferno214221/qmk-firmware)).
 
 Features include:
 
