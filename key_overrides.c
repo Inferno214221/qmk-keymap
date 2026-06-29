@@ -10,7 +10,7 @@ KEY_OVERRIDE_SHIFT_OR_COMBO(o_lcbr_1_none, o_lcbr_1_shift, KC_1, KC_LCBR);
 KEY_OVERRIDE_SHIFT_OR_COMBO(o_rcbr_2_none, o_rcbr_2_shift, KC_2, KC_RCBR);
 KEY_OVERRIDE_SHIFT_OR_COMBO(o_labk_3_none, o_labk_3_shift, KC_3, KC_LABK);
 KEY_OVERRIDE_SHIFT_OR_COMBO(o_rabk_4_none, o_rabk_4_shift, KC_4, KC_RABK);
-// KEY_OVERRIDE_SHIFT_OR_COMBO(o_xxxx_5_none, o_xxxx_5_shift, KC_5, KC_NO);
+KEY_OVERRIDE_SHIFT_OR_COMBO(o_mins_5_none, o_mins_5_shift, KC_5, KC_MINS);
 KEY_OVERRIDE_SHIFT_OR_COMBO(o_perc_6_none, o_prec_6_shift, KC_6, KC_PERC);
 KEY_OVERRIDE_SHIFT_OR_COMBO(o_lbrc_7_none, o_lbrc_7_shift, KC_7, KC_LBRC);
 KEY_OVERRIDE_SHIFT_OR_COMBO(o_rbrc_8_none, o_rbrc_8_shift, KC_8, KC_RBRC);
@@ -39,8 +39,8 @@ const key_override_t *key_overrides[] = {
   &o_labk_3_shift,
   &o_rabk_4_none,
   &o_rabk_4_shift,
-  // &o_xxxx_5_none,
-  // &o_xxxx_5_shift,
+  &o_mins_5_none,
+  &o_mins_5_shift,
   &o_perc_6_none,
   &o_prec_6_shift,
   &o_lbrc_7_none,
